@@ -3,4 +3,4 @@ project(liberrc)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_library(liberrc library.h)
+add_library(liberrc errc.h errorfunc.cpp)

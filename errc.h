@@ -22,9 +22,9 @@ public:
     T value;
     E error;
 
-    ErrorValue();
-    ErrorValue(const ErrorValue &ev);
-    ErrorValue(T value_, E error_);
+    [[nodiscard]] ErrorValue();
+    [[nodiscard]] ErrorValue(const ErrorValue &ev);
+    [[nodiscard]] ErrorValue(T value_, E error_);
 
     ErrorValue& operator=(const ErrorValue &ev);
     ErrorValue& operator=(T value);
@@ -63,8 +63,8 @@ public:
     void set(T value, E error);
     void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr);
 
-    E min() const;
-    E max() const;
+    [[nodiscard]] E min() const;
+    [[nodiscard]] E max() const;
 
 protected:
 

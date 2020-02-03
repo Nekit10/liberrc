@@ -63,8 +63,8 @@ public:
     void set(T value, E error);
     void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr);
 
-    E min();
-    E max();
+    E min() const;
+    E max() const;
 
 protected:
 

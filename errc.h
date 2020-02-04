@@ -291,6 +291,8 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
 // CMath functions
 
+#ifndef LIBERRC_ADD_ERRMATH
+
 namespace errmath {
 
     template <typename T, typename E>
@@ -391,5 +393,7 @@ namespace errmath {
     template <typename T, typename E, typename T1, typename E1, typename T2, typename E2>
     auto fma(const ErrorValue<T, E> &x, const ErrorValue<T1, E1> &y, const ErrorValue<T2, E2> &z);
 }
+
+#endif //LIBERRC_ADD_ERRMATH
 
 #endif //LIBERRC_ERRC_H

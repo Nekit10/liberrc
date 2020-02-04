@@ -149,7 +149,9 @@ public:
         return tmp;
     };
 
-    std::weak_ordering operator<=>(const ErrorValue  &ev) const;
+    std::weak_ordering operator<=>(const ErrorValue  &ev) const {
+        return (value <=> ev.value);
+    };
 
     E operator[](int) const;
     operator T() const;

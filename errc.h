@@ -325,8 +325,10 @@ namespace errmath {
         return ErrorValue(atan(x.value), x.error/sqrt(1 + x.value*x.value));
     }
 
-    template <typename T, typename E>
-    auto atan2(const ErrorValue<T, E> &x);
+    template <typename T, typename E, typename T1, typename E1>
+    auto atan2(const ErrorValue<T, E> &y, const ErrorValue<T1, E1> &x) {
+        return tan(y/x);
+    }
 
     template <typename T, typename E>
     auto sinh(const ErrorValue<T, E> &x);

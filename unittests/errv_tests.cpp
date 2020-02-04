@@ -89,6 +89,19 @@ TEST(ErrorValueAssigmentOperators, DoubleAssigmentOpertaor) {
     ASSERT_NEAR(a.error, 2.5, ABSMAX) << "Setting error (ErrorValue::DEF_ERROR_FUNC) in assigment operator error";
 }
 
+TEST(ErrorValueCompoundAssigmentOperators, AdditionOperatorTest) {
+    ErrorValue a(10.0, 12.4), b(2.0, 0.12);
+    a += b;
+
+    ASSERT_NEAR(a.value, 12, ABSMAX);
+    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+
+    a += 6;
+
+    ASSERT_NEAR(a.value, 18, ABSMAX);
+    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

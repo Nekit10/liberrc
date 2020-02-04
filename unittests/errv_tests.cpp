@@ -44,6 +44,51 @@ TEST(ErrorValueConstructors, ValueAndCopyConstructorTest) {
     ASSERT_EQ(a.error, 2) << "Copy constructor changes original";
 }
 
+
+TEST(ErrorValueAssigmentOperators, CopyAssigmentOpertaor) {
+    ErrorValue a = ErrorValue(10.0, 2.0);
+    ErrorValue<double, double> b;
+    b = a;
+    ASSERT_EQ(b.value, 10) << "Copy assigment operator error";
+    ASSERT_EQ(b.error, 2) << "Copy assigment operator error";
+
+    b.value = 5;
+    b.error = 1;
+
+    ASSERT_EQ(a.value, 10) << "Copy assigment operator changes original";
+    ASSERT_EQ(a.error, 2) << "Copy assigment operator changes original";
+}
+
+TEST(ErrorValueAssigmentOperators, DoubleAssigmentOpertaor) {
+    ErrorValue<double, double> a;
+
+    a.setDefaultErrorCalculationMethod(ErrorValue<>::DEF_ERROR_ZERO);
+    a = 5;
+    ASSERT_EQ(a.value, 5) << "Setting value in assigment operator error";
+    ASSERT_EQ(a.error, 0) << "Setting error (ErrorValue::DEF_ERROR_ZERO) in assigment operator error";
+
+    a.setDefaultErrorCalculationMethod(ErrorValue<>::DEF_ERROR_HALF);
+    a = 10;
+    ASSERT_EQ(a.value, 10) << "Setting value in assigment operator error";
+    ASSERT_EQ(a.error, 5) << "Setting error (ErrorValue::DEF_ERROR_HALF) in assigment operator error";
+    a = 1;
+    ASSERT_EQ(a.value, 1) << "Setting value in assigment operator error";
+    ASSERT_EQ(a.error, 0.5)  << "Setting error (ErrorValue::DEF_ERROR_HALF) in assigment operator error";
+    a = 0;
+    ASSERT_EQ(a.value, 0) << "Setting value in assigment operator error";
+    ASSERT_EQ(a.error, 0.5) << "Setting error (ErrorValue::DEF_ERROR_HALF) in assigment operator error";
+    a = 0.03;
+    ASSERT_EQ(a.value, 0.03) << "Setting value in assigment operator error";
+    ASSERT_EQ(a.error, 0.005) << "Setting error (ErrorValue::DEF_ERROR_HALF) in assigment operator error";
+//
+    a.setDefaultErrorCalculationMethod(ErrorValue<>::DEF_ERROR_FUNC, [](double x) -> double {
+        return x/2;
+    });
+    a = 5;
+    ASSERT_EQ(a.value, 5) << "Setting value in assigment operator error";
+    ASSERT_EQ(a.error, 2.5) << "Setting error (ErrorValue::DEF_ERROR_FUNC) in assigment operator error";
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

@@ -172,6 +172,36 @@ namespace errmath {
     template <typename T, typename E>
     typename std::enable_if<std::is_integral<T>::value, ErrorValue<double , E>>::type
     logn(ErrorValue<T , E> x);
+
+    template <typename T, typename E, typename T1, typename E1>
+    auto pow(const ErrorValue<T , E>& base, const ErrorValue<T1, E1>& exponent);
+
+    template <typename T, typename E>
+    auto sqrt(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto cbrt(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E, typename T1, typename E1>
+    auto hypot(const ErrorValue<T , E>& x, const ErrorValue<T1, E1>& y);
+
+    template <typename T, typename E>
+    auto erf(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto erfc(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto tgamma(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto lgamma(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto abs(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E, typename T1, typename E1, typename T2, typename E2>
+    auto fma(const ErrorValue<T, E> &x, const ErrorValue<T1, E1> &y, const ErrorValue<T2, E2> &z);
 }
 
 #endif //LIBERRC_ERRC_H

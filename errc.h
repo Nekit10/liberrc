@@ -474,10 +474,16 @@ namespace errmath {
     }
 
     template <typename T, typename E>
-    auto abs(const ErrorValue<T, E> &x);
+    auto abs(const ErrorValue<T, E> &x) {
+        return ErrorValue(abs(x.value), x.error);
+    }
 
     template <typename T, typename E, typename T1, typename E1, typename T2, typename E2>
-    auto fma(const ErrorValue<T, E> &x, const ErrorValue<T1, E1> &y, const ErrorValue<T2, E2> &z);
+    auto fma(const ErrorValue<T, E> &x_, const ErrorValue<T1, E1> &y_, const ErrorValue<T2, E2> &z_) {
+        T x = x_.value, y = y_.value, z = z_.value;
+        T dx = x_.error, dy = y_.error, dz = z_.error;
+        return ErrorValue(fma(x, y, z), abs(y)*dx + abs(x)*dy + dz);
+    };
 }
 
 #endif //LIBERRC_ADD_ERRMATH

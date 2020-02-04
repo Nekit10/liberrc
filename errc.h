@@ -126,8 +126,12 @@ public:
         res /= value_;
         return res;
     };
-    ErrorValue operator+() const;
-    ErrorValue operator-() const;
+    ErrorValue operator+() const {
+        return ErrorValue(*this);
+    };
+    ErrorValue operator-() const {
+        return ErrorValue(-value, error);
+    };
     ErrorValue& operator++();
     ErrorValue& operator++(int);
     ErrorValue& operator--();

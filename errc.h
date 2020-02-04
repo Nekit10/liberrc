@@ -167,8 +167,6 @@ public:
         return value;
     };
 
-    friend std::ostream& operator<<(std::ostream&, const ErrorValue<T,E> &);
-
     void set(T value, E error);
     void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr);
 
@@ -217,7 +215,9 @@ protected:
 };
 
 template <typename T, typename E>
-std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev);
+std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
+    os << ev.value << " ± " + ev.error;
+};
 
 // CMath functions
 

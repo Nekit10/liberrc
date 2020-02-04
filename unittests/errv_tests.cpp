@@ -102,8 +102,6 @@ TEST(ErrorValueCompoundAssigmentOperators, AdditionOperatorTest) {
     ASSERT_NEAR(a.value, 12.52, ABSMAX);
 }
 
-
-
 TEST(ErrorValueCompoundAssigmentOperators, SubtructionOperatorTest) {
     ErrorValue a(10.0, 12.4), b(2.0, 0.12);
     a -= b;

@@ -28,7 +28,7 @@ You can freely contribute to our github. There're many things you can do: fix bu
 * Add your name to list of contributors in end of this file
 
 Also, feel free to update or translate project's [GitHub wiki](https://github.com/Nekit10/liberrc/wiki) or send your
-ideas and proposals to my email, you can find it below.
+ideas and proposals [here](https://github.com/Nekit10/liberrc/issues/new?assignees=Nekit10&labels=enhancement&template=feature_request.md&title=).
 ## License
 ![GNU LGPL v3 logo](https://www.gnu.org/graphics/lgplv3-with-text-154x68.png)
 liberrc is free software: you can redistribute it and/or modify

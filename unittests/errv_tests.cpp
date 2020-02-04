@@ -86,7 +86,7 @@ TEST(ErrorValueAssigmentOperators, DoubleAssigmentOpertaor) {
     });
     a = 5;
     ASSERT_EQ(a.value, 5) << "Setting value in assigment operator error";
-    ASSERT_EQ(a.error, 2.5) << "Setting error (ErrorValue::DEF_ERROR_FUNC) in assigment operator error";
+    ASSERT_NEAR(a.error, 2.5, ABSMAX) << "Setting error (ErrorValue::DEF_ERROR_FUNC) in assigment operator error";
 }
 
 int main(int argc, char **argv) {

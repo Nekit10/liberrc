@@ -94,12 +94,12 @@ TEST(ErrorValueCompoundAssigmentOperators, AdditionOperatorTest) {
     a += b;
 
     ASSERT_NEAR(a.value, 12, ABSMAX);
-    ASSERT_NEAR(a.error, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
 
     a += 6;
 
     ASSERT_NEAR(a.value, 18, ABSMAX);
-    ASSERT_NEAR(a.error, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
 }
 
 TEST(ErrorValueCompoundAssigmentOperators, SubtructionOperatorTest) {
@@ -107,12 +107,12 @@ TEST(ErrorValueCompoundAssigmentOperators, SubtructionOperatorTest) {
     a -= b;
 
     ASSERT_NEAR(a.value, 8, ABSMAX);
-    ASSERT_NEAR(a.error, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
 
     a -= 6;
 
     ASSERT_NEAR(a.value, 2, ABSMAX);
-    ASSERT_NEAR(a.error, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
 }
 
 TEST(ErrorValueCompoundAssigmentOperators, MultiplicationOperatorTest) {

@@ -41,117 +41,150 @@ public:
     T value;
     E error;
 
+    //------- CONSTRUCTORS -------
+
     [[nodiscard]] ErrorValue() = default;
     [[nodiscard]] ErrorValue(const ErrorValue &ev) = default;
     [[nodiscard]] ErrorValue(T value_, E error_) : value(value_), error(error_) {};
+
+    //------- ASSIGMENT OPERATORS -------
 
     ErrorValue& operator=(const ErrorValue &ev) {
         if (*ev != this) {
             value = ev.value, error = ev.error;
             return *this;
         }
-    };
+    }
+
     ErrorValue& operator=(T value_) {
         value = value_;
-    };
+    }
+
+    //------- COMPOUND ASSIGMENT OPERATORS -------
 
     ErrorValue operator+=(const ErrorValue &ev) {
         value += ev.value;
         error += ev.error;
-    };
+    }
+
     ErrorValue operator+=(T value_) {
         *this += ErrorValue(value_, defaultNumberError(value_));
-    };
+    }
+
     ErrorValue operator-=(const ErrorValue &ev) {
         value -= ev.value;
         error += ev.error;
     }
+
     ErrorValue operator-=(T value_) {
         *this -= ErrorValue(value_, defaultNumberError(value_));
-    };
+    }
+
     ErrorValue operator*=(const ErrorValue &ev) {
         T oldV = value;
         value *= ev.value;
         error = value*(error/oldV + ev.error/ev.value);
-    };
+    }
+
     ErrorValue operator*=(T value_) {
         *this *= ErrorValue(value_, defaultNumberError(value_));
-    };
+    }
+
     ErrorValue operator/=(const ErrorValue &ev) {
         T oldV = value;
         value /= ev.value;
         error = value*(error/oldV + ev.error/ev.value);
-    };
+    }
+
     ErrorValue operator/=(T value_) {
         *this /= ErrorValue(value_, defaultNumberError(value_));
-    };
+    }
+
+    //------- ARITHMETIC OPERATORS -------
 
     ErrorValue operator+(const ErrorValue &ev) const {
         ErrorValue res = *this;
         res += ev;
         return res;
-    };
+    }
+
     ErrorValue operator+(const T &value_) const {
         ErrorValue res = *this;
         res += value_;
         return res;
-    };
+    }
+
     ErrorValue operator-(const ErrorValue &ev) const {
         ErrorValue res = *this;
         res -= ev;
         return res;
-    };
+    }
+
     ErrorValue operator-(const T &value_) const {
         ErrorValue res = *this;
         res -= value_;
         return res;
-    };
+    }
+
     ErrorValue operator*(const ErrorValue &ev) const {
         ErrorValue res = *this;
         res *= ev;
         return res;
-    };
+    }
+
     ErrorValue operator*(const T &value_) const {
         ErrorValue res = *this;
         res *= value_;
         return res;
-    };
+    }
+
     ErrorValue operator/(const ErrorValue &ev) const {
         ErrorValue res = *this;
         res /= ev;
         return res;
-    };
+    }
+
     ErrorValue operator/(const T &value_) const {
         ErrorValue res = *this;
         res /= value_;
         return res;
-    };
+    }
+
     ErrorValue operator+() const {
         return ErrorValue(*this);
-    };
+    }
+
     ErrorValue operator-() const {
         return ErrorValue(-value, error);
-    };
+    }
+
     ErrorValue& operator++() {
         return (*this += 1);
-    };
+    }
+
     const ErrorValue operator++(int) {
         ErrorValue tmp(*this);
         ++(*this);
         return tmp;
-    };
+    }
+
     ErrorValue& operator--() {
         return (*this -= 1);
-    };
+    }
+
     const ErrorValue operator--(int) {
         ErrorValue tmp(*this);
         --(*this);
         return tmp;
-    };
+    }
+
+    //------- COMPARISON OPERATORS -------
 
     std::weak_ordering operator<=>(const ErrorValue  &ev) const {
         return (value <=> ev.value);
-    };
+    }
+
+    //------- MEMBER OPERATORS -------
 
     E operator[](int i) const {
         switch(i) {
@@ -162,15 +195,21 @@ public:
             default:
                 throw std::range_error("ErrorValue index must be 0 or 1");
         }
-    };
+    }
+
+    //------- STATIC_CAST CONVERSION OPERATORS -------
+
     explicit operator T() const {
         return value;
     };
 
+    //------- VOID METHODS -------
+
     void set(T value_, E error_) {
         value = value_;
         error = error_;
-    };
+    }
+
     void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr) {
         switch(code) {
             case DEF_ERROR_FUNC:
@@ -183,22 +222,27 @@ public:
             default:
                 throw std::range_error("Invalid default error function code: " + std::to_string(code));
         }
-    };
+    }
+
+    //------- NON-VOID METHODS -------
 
     [[nodiscard]] E min() const {
         return value - error;
-    };
+    }
+
     [[nodiscard]] E max() const {
         return value + error;
-    };
+    }
+
     [[nodiscard]] int getDefaultErrorCalculationMethod() const {
         return numberDefaultErrorCode;
-    };
+    }
+
     [[nodiscard]] std::function<E(T)> getDefaultErrorCalcFunction() const {
         if (numberDefaultErrorCode != DEF_ERROR_FUNC)
             return nullptr;
         return defaultErrorCalcFunction;
-    };
+    }
 
 protected:
 

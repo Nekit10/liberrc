@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(unittests)
 
-add_library(liberrc errc.h)
+#add_library(liberrc errc.h)

@@ -143,7 +143,7 @@ public:
     ErrorValue& operator--() {
         return (*this -= 1);
     };
-    ErrorValue operator--(int) {
+    const ErrorValue operator--(int) {
         ErrorValue tmp(*this);
         --(*this);
         return tmp;

@@ -361,6 +361,22 @@ namespace errmath {
     }
 
     template <typename T, typename E>
+    auto erf(const ErrorValue<T, E> &x) {
+        return ErrorValue(
+                erf(x.value),
+                2*exp(-x.value*x.value)*x.error/sqrt(M_PI)
+        );
+    }
+
+    template <typename T, typename E>
+    auto erfc(const ErrorValue<T, E> &x) {
+        return ErrorValue(
+                erfc(x.value),
+                2*exp(-x.value*x.value)*x.error/sqrt(M_PI)
+        );
+    }
+
+    template <typename T, typename E>
     auto exp(const ErrorValue<T, E> &x) {
         return ErrorValue(exp(x.value), exp(x.value)*x.error);
     }
@@ -456,18 +472,6 @@ namespace errmath {
                 (x*dx + y*dy)/sqrt(x*x + y*y)
                 );
     }
-
-    template <typename T, typename E>
-    auto erf(const ErrorValue<T, E> &x);
-
-    template <typename T, typename E>
-    auto erfc(const ErrorValue<T, E> &x);
-
-    template <typename T, typename E>
-    auto tgamma(const ErrorValue<T, E> &x);
-
-    template <typename T, typename E>
-    auto lgamma(const ErrorValue<T, E> &x);
 
     template <typename T, typename E>
     auto abs(const ErrorValue<T, E> &x);

@@ -51,7 +51,22 @@ public:
             return *this;
         }
     };
-    ErrorValue& operator=(T value);
+    ErrorValue& operator=(T value_) {
+        switch (numberDefaultErrorIsZero) {
+            case DEF_ERROR_ZERO:
+                value = value_;
+                error = 0;
+                break;
+            case DEF_ERROR_HALF:
+                value = value_;
+                error = halfErrorCalcFunction(value_);
+                break;
+            [[unlikely]] case DEF_ERROR_FUNC:
+                value = value_;
+                error = defaultErrorCalcFunction(value_);
+                break;
+        }
+    };
 
     ErrorValue operator+=(const ErrorValue &ev);
     ErrorValue operator+=(T value);

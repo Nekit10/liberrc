@@ -21,6 +21,7 @@
 
 #include <type_traits>
 #include <ostream>
+#include <cmath>
 #include <compare>
 
 template <typename T = long double , typename E = long double>
@@ -95,6 +96,24 @@ protected:
 
     int numberDefaultErrorIsZero = DEF_ERROR_ZERO;
     std::function<E(T)> defaultErrorCalcFunction = nullptr;
+
+    E halfErrorCalcFunction(T x) {
+        if (floor(x) == x) {
+            long double c = 0;
+            while (x % 10 == 0) {
+                c++;
+                x /= 10;
+            }
+            return 5*pow(10, --c);
+        } else {
+            long double c = 0;
+            while (floor(x) != x) {
+                c++;
+                x *= 10;
+            }
+            return 5*pow(10, -c-1);
+        }
+    }
 
 };
 

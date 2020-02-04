@@ -50,7 +50,7 @@ public:
     //------- ASSIGMENT OPERATORS -------
 
     ErrorValue& operator=(const ErrorValue &ev) {
-        if (*ev != this) {
+        if (&ev != this) {
             value = ev.value, error = ev.error;
             return *this;
         }

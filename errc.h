@@ -296,13 +296,19 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 namespace errmath {
 
     template <typename T, typename E>
-    auto sin(const ErrorValue<T, E> &x);
+    auto sin(const ErrorValue<T, E> &x) {
+        return ErrorValue(sin(x.value), abs(cos(x.value))*x.error);
+    }
 
     template <typename T, typename E>
-    auto cos(const ErrorValue<T, E> &x);
+    auto cos(const ErrorValue<T, E> &x) {
+        return ErrorValue(cos(x.value), abs(sin(x.value)*x.error);
+    }
 
     template <typename T, typename E>
-    auto tan(const ErrorValue<T, E> &x);
+    auto tan(const ErrorValue<T, E> &x) {
+        return ErrorValue(tan(x.value), x.error/pow(cos(x.value, 2)));
+    }
 
     template <typename T, typename E>
     auto asin(const ErrorValue<T, E> &x);

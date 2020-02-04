@@ -40,9 +40,9 @@ public:
     T value;
     E error;
 
-    [[nodiscard]] ErrorValue();
-    [[nodiscard]] ErrorValue(const ErrorValue &ev);
-    [[nodiscard]] ErrorValue(T value_, E error_);
+    [[nodiscard]] ErrorValue() = default;
+    [[nodiscard]] ErrorValue(const ErrorValue &ev) = default;
+    [[nodiscard]] ErrorValue(T value_, E error_) : value(value_), error(error_) {};
 
     ErrorValue& operator=(const ErrorValue &ev);
     ErrorValue& operator=(T value);

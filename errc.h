@@ -132,10 +132,22 @@ public:
     ErrorValue operator-() const {
         return ErrorValue(-value, error);
     };
-    ErrorValue& operator++();
-    ErrorValue& operator++(int);
-    ErrorValue& operator--();
-    ErrorValue& operator--(int);
+    ErrorValue& operator++() {
+        return (*this += 1);
+    };
+    const ErrorValue operator++(int) {
+        ErrorValue tmp(*this);
+        ++(*this);
+        return tmp;
+    };
+    ErrorValue& operator--() {
+        return (*this -= 1);
+    };
+    ErrorValue operator--(int) {
+        ErrorValue tmp(*this);
+        --(*this);
+        return tmp;
+    };
 
     std::weak_ordering operator<=>(const ErrorValue  &ev) const;
 

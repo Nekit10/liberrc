@@ -171,7 +171,19 @@ public:
         value = value_;
         error = error_;
     };
-    void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr);
+    void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr) {
+        switch(code) {
+            case DEF_ERROR_FUNC:
+                defaultErrorCalcFunction = fun;
+                [[fallthrough]];
+            case DEF_ERROR_ZERO:
+                [[fallthrough]];
+            case DEF_ERROR_HALF:
+               numberDefaultErrorCode = code;
+            default:
+                throw std::range_error("Invalid default error function code: " + std::to_string(code));
+        }
+    };
 
     [[nodiscard]] E min() const;
     [[nodiscard]] E max() const;
@@ -180,11 +192,11 @@ public:
 
 protected:
 
-    int numberDefaultErrorIsZero = DEF_ERROR_ZERO;
+    int numberDefaultErrorCode = DEF_ERROR_ZERO;
     std::function<E(T)> defaultErrorCalcFunction = nullptr;
 
     E defaultNumberError(T x) {
-        switch (numberDefaultErrorIsZero) {
+        switch (numberDefaultErrorCode) {
             case DEF_ERROR_ZERO:
                 return 0;
                 break;

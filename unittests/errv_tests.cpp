@@ -22,6 +22,28 @@
 
 const double ABSMAX = 0.000001;
 
+TEST(ErrorValueConstructors, DefaultConstructorTest) {
+    ErrorValue<> a = ErrorValue();
+    ASSERT_EQ(a.value, 0);
+    ASSERT_EQ(a.error, 0);
+}
+
+TEST(ErrorValueConstructors, ValueAndCopyConstructorTest) {
+    ErrorValue a = ErrorValue(10.0, 2.0);
+    ASSERT_EQ(a.value, 10) << "Value constructor error";
+    ASSERT_EQ(a.error, 2) << "Value constructor error";
+
+    ErrorValue b(a);
+    ASSERT_EQ(b.value, 10) << "Copy constructor error";
+    ASSERT_EQ(b.error, 2) << "Copy constructor error";
+
+    b.value = 5;
+    b.error = 1;
+
+    ASSERT_EQ(a.value, 10) << "Copy constructor changes original";
+    ASSERT_EQ(a.error, 2) << "Copy constructor changes original";
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

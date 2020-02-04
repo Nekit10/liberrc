@@ -44,7 +44,12 @@ public:
     [[nodiscard]] ErrorValue(const ErrorValue &ev) = default;
     [[nodiscard]] ErrorValue(T value_, E error_) : value(value_), error(error_) {};
 
-    ErrorValue& operator=(const ErrorValue &ev);
+    ErrorValue& operator=(const ErrorValue &ev) {
+        if (*ev != this) {
+            value = ev.value, error = ev.error;
+            return *this;
+        }
+    };
     ErrorValue& operator=(T value);
 
     ErrorValue operator+=(const ErrorValue &ev);

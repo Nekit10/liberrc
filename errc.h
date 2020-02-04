@@ -86,14 +86,46 @@ public:
         *this /= ErrorValue(value_, defaultNumberError(value_));
     };
 
-    ErrorValue operator+(const ErrorValue &ev) const;
-    ErrorValue operator+(const T &value) const;
-    ErrorValue operator-(const ErrorValue &ev) const;
-    ErrorValue operator-(const T &value) const;
-    ErrorValue operator*(const ErrorValue &ev) const;
-    ErrorValue operator*(const T &value) const;
-    ErrorValue operator/(const ErrorValue &ev) const;
-    ErrorValue operator/(const T &value) const;
+    ErrorValue operator+(const ErrorValue &ev) const {
+        ErrorValue res = *this;
+        res += ev;
+        return res;
+    };
+    ErrorValue operator+(const T &value_) const {
+        ErrorValue res = *this;
+        res += value_;
+        return res;
+    };
+    ErrorValue operator-(const ErrorValue &ev) const {
+        ErrorValue res = *this;
+        res -= ev;
+        return res;
+    };
+    ErrorValue operator-(const T &value_) const {
+        ErrorValue res = *this;
+        res -= value_;
+        return res;
+    };
+    ErrorValue operator*(const ErrorValue &ev) const {
+        ErrorValue res = *this;
+        res *= ev;
+        return res;
+    };
+    ErrorValue operator*(const T &value_) const {
+        ErrorValue res = *this;
+        res *= value_;
+        return res;
+    };
+    ErrorValue operator/(const ErrorValue &ev) const {
+        ErrorValue res = *this;
+        res /= ev;
+        return res;
+    };
+    ErrorValue operator/(const T &value_) const {
+        ErrorValue res = *this;
+        res /= value_;
+        return res;
+    };
     ErrorValue operator+() const;
     ErrorValue operator-() const;
     ErrorValue& operator++();

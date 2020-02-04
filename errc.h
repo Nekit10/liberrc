@@ -361,33 +361,61 @@ namespace errmath {
     }
 
     template <typename T, typename E>
-    auto exp(const ErrorValue<T, E> &x);
+    auto exp(const ErrorValue<T, E> &x) {
+        return ErrorValue(exp(x.value), exp(x.value)*x.error);
+    }
 
     template <typename T, typename E>
-    auto log(const ErrorValue<T, E> &x);
+    auto log10(const ErrorValue<T, E> &x) {
+        return ErrorValue(log10(x.value), x.error/(x.value * log(static_cast<E>(10))));
+    }
 
     template <typename T, typename E>
-    auto log10(const ErrorValue<T, E> &x);
+    auto exp2(const ErrorValue<T, E> &x) {
+        return ErrorValue(exp2(x.value), exp2(x.value)*log(static_cast<E>(2))*x.error);
+    }
 
     template <typename T, typename E>
-    auto exp2(const ErrorValue<T, E> &x);
+    auto log2(const ErrorValue<T, E> &x) {
+        return ErrorValue(log2(x.value), x.error/(x.value*log(static_cast<E>(2))));
+    }
 
     template <typename T, typename E>
-    auto expm1(const ErrorValue<T, E> &x);
+    auto log(const ErrorValue<T, E> &x) {
+        return ErrorValue(log(x.value), x.error/x.value);
+    }
 
     template <typename T, typename E>
-    auto log1p(const ErrorValue<T, E> &x);
+    auto expm1(const ErrorValue<T, E> &x) {
+        return ErrorValue(expm1(x.value), exp(x.value)*x.error);
+    }
 
     template <typename T, typename E>
-    auto log2(const ErrorValue<T, E> &x);
+    auto log1p(const ErrorValue<T, E> &x) {
+        return ErrorValue(log1p(x.value), x.error/log(1 + x.value));
+    }
 
-    template <typename T, typename E>
+    template <typename T, typename E, typename N>
     typename std::enable_if<std::is_floating_point<T>::value, ErrorValue<T, E>>::type
-    logn(ErrorValue<T , E> x);
+    logn(ErrorValue<T , E> x, N n) {
+        static_assert(std::is_integral<N>::value,
+                      "Type of logn base value must be integral");
+        return ErrorValue<T, E>(
+                log(x.value)/log(n),
+                x.error/(x.value*log(n))
+                );
+    }
 
-    template <typename T, typename E>
+    template <typename T, typename E, typename N>
     typename std::enable_if<std::is_integral<T>::value, ErrorValue<double , E>>::type
-    logn(ErrorValue<T , E> x);
+    logn(ErrorValue<T , E> x, N n) {
+        static_assert(std::is_integral<N>::value,
+                      "Type of logn base value must be integral");
+        return ErrorValue<double , E>(
+                log(x.value)/log(n),
+                x.error/(x.value*log(n))
+        );
+    }
 
     template <typename T, typename E, typename T1, typename E1>
     auto pow(const ErrorValue<T , E>& base, const ErrorValue<T1, E1>& exponent);

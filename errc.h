@@ -229,6 +229,7 @@ public:
                 [[fallthrough]];
             case DEF_ERROR_HALF:
                numberDefaultErrorCode = code;
+               break;
             default:
                 throw std::range_error("Invalid default error function code: " + std::to_string(code));
         }
@@ -270,6 +271,8 @@ protected:
                 [[unlikely]] case DEF_ERROR_FUNC:
                 return defaultErrorCalcFunction(x);
                 break;
+            default:
+                throw std::range_error("Invalid default error function code: " + std::to_string(numberDefaultErrorCode));
         }
     }
 

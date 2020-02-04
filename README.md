@@ -12,6 +12,7 @@ liberrc don't have stable versions yet, you can find the latest version [here](h
 * Supporting more accurate types than long double (v3)
 ## Contribution
 You can freely contribute to our github. There're many things you can do: fix bugs, add new features. Please follow several simple rules:
+* **DO NOT** commit to master, use develop or create your own branch instead
 * Create one issue per one bug
 * Do not duplicate issues
 * Specify OS and the compiler you are using in issues

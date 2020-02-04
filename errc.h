@@ -34,9 +34,9 @@ class ErrorValue {
 
 public:
 
-    const int DEF_ERROR_ZERO = 0;
-    const int DEF_ERROR_HALF = 1;
-    const int DEF_ERROR_FUNC = 2;
+    static const int DEF_ERROR_ZERO = 0;
+    static const int DEF_ERROR_HALF = 1;
+    static const int DEF_ERROR_FUNC = 2;
 
     T value;
     E error;

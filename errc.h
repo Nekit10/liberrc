@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <ostream>
+#include <cmath>
 #include <compare>
 
 template <typename T = long double , typename E = long double>
@@ -77,5 +78,78 @@ protected:
 
 template <typename T, typename E>
 std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev);
+
+// CMath functions
+
+namespace errmath {
+
+    template <typename T, typename E>
+    auto sin(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto cos(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto tan(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto asin(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto acos(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto atan(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto atan2(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto sinh(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto cosh(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto tanh(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto asinh(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto acosh(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto atanh(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto exp(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto log(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto log10(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto exp2(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto expm1(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto log1p(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    auto log2(const ErrorValue<T, E> &x);
+
+    template <typename T, typename E>
+    typename std::enable_if<std::is_floating_point<T>::value, ErrorValue<T, E>>::type
+    logn(ErrorValue<T , E> x);
+
+    template <typename T, typename E>
+    typename std::enable_if<std::is_integral<T>::value, ErrorValue<double , E>>::type
+    logn(ErrorValue<T , E> x);
+}
 
 #endif //LIBERRC_ERRC_H

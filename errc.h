@@ -346,13 +346,19 @@ namespace errmath {
     }
 
     template <typename T, typename E>
-    auto asinh(const ErrorValue<T, E> &x);
+    auto asinh(const ErrorValue<T, E> &x) {
+        return ErrorValue(asinh(x.value), x.error/sqrt(1 + x.value*x.value));
+    }
 
     template <typename T, typename E>
-    auto acosh(const ErrorValue<T, E> &x);
+    auto acosh(const ErrorValue<T, E> &x) {
+        return ErrorValue(acosh(x.value), x.error/sqrt(x.value*x.value - 1));
+    }
 
     template <typename T, typename E>
-    auto atanh(const ErrorValue<T, E> &x);
+    auto atanh(const ErrorValue<T, E> &x) {
+        return ErrorValue(atanh(x.value), x.error/(1 - x.value*x.value));
+    }
 
     template <typename T, typename E>
     auto exp(const ErrorValue<T, E> &x);

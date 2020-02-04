@@ -185,8 +185,12 @@ public:
         }
     };
 
-    [[nodiscard]] E min() const;
-    [[nodiscard]] E max() const;
+    [[nodiscard]] E min() const {
+        return value - error;
+    };
+    [[nodiscard]] E max() const {
+        return value + error;
+    };
     [[nodiscard]] int getDefaultErrorCalculationMethod() const;
     [[nodiscard]] std::function<E(T)> getDefaultErrorCalcFunction() const;
 

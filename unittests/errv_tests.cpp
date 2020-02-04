@@ -94,12 +94,12 @@ TEST(ErrorValueCompoundAssigmentOperators, AdditionOperatorTest) {
     a += b;
 
     ASSERT_NEAR(a.value, 12, ABSMAX);
-    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.52, ABSMAX);
 
     a += 6;
 
     ASSERT_NEAR(a.value, 18, ABSMAX);
-    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.52, ABSMAX);
 }
 
 TEST(ErrorValueCompoundAssigmentOperators, SubtructionOperatorTest) {
@@ -107,12 +107,12 @@ TEST(ErrorValueCompoundAssigmentOperators, SubtructionOperatorTest) {
     a -= b;
 
     ASSERT_NEAR(a.value, 8, ABSMAX);
-    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.52, ABSMAX);
 
     a -= 6;
 
     ASSERT_NEAR(a.value, 2, ABSMAX);
-    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+    ASSERT_NEAR(a.error, 12.52, ABSMAX);
 }
 
 TEST(ErrorValueCompoundAssigmentOperators, MultiplicationOperatorTest) {
@@ -120,12 +120,12 @@ TEST(ErrorValueCompoundAssigmentOperators, MultiplicationOperatorTest) {
     a *= b;
 
     ASSERT_NEAR(a.value, 20.4, ABSMAX);
-    ASSERT_NEAR(a.value, 24.830'186'789'470, ABSMAX);
+    ASSERT_NEAR(a.error, 24.830'186'789'470, ABSMAX);
 
     a *= 2;
 
     ASSERT_NEAR(a.value, 40.8, ABSMAX);
-    ASSERT_NEAR(a.value, 49.660'373'578'941, ABSMAX);
+    ASSERT_NEAR(a.error, 49.660'373'578'941, ABSMAX);
 }
 
 TEST(ErrorValueCompoundAssigmentOperators, DivisionOperatorTest) {
@@ -133,7 +133,7 @@ TEST(ErrorValueCompoundAssigmentOperators, DivisionOperatorTest) {
     a /= b;
 
     ASSERT_NEAR(a.value, 5.1, ABSMAX);
-    ASSERT_NEAR(a.value, 24.830'186'789'470, ABSMAX);
+    ASSERT_NEAR(a.error, 24.830'186'789'470, ABSMAX);
 
     a /= 2;
 

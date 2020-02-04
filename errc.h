@@ -52,20 +52,7 @@ public:
         }
     };
     ErrorValue& operator=(T value_) {
-        switch (numberDefaultErrorIsZero) {
-            case DEF_ERROR_ZERO:
-                value = value_;
-                error = 0;
-                break;
-            case DEF_ERROR_HALF:
-                value = value_;
-                error = halfErrorCalcFunction(value_);
-                break;
-            [[unlikely]] case DEF_ERROR_FUNC:
-                value = value_;
-                error = defaultErrorCalcFunction(value_);
-                break;
-        }
+        value = value_;
     };
 
     ErrorValue operator+=(const ErrorValue &ev);
@@ -111,6 +98,20 @@ protected:
 
     int numberDefaultErrorIsZero = DEF_ERROR_ZERO;
     std::function<E(T)> defaultErrorCalcFunction = nullptr;
+
+    E defaultNumberError(T x) {
+        switch (numberDefaultErrorIsZero) {
+            case DEF_ERROR_ZERO:
+                return 0;
+                break;
+            case DEF_ERROR_HALF:
+                return halfErrorCalcFunction(x);
+                break;
+                [[unlikely]] case DEF_ERROR_FUNC:
+                return defaultErrorCalcFunction(x);
+                break;
+        }
+    }
 
     E halfErrorCalcFunction(T x) {
         if (floor(x) == x) {

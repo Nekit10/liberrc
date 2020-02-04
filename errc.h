@@ -167,7 +167,10 @@ public:
         return value;
     };
 
-    void set(T value, E error);
+    void set(T value_, E error_) {
+        value = value_;
+        error = error_;
+    };
     void setDefaultErrorCalculationMethod(int code, std::function<E(T)> fun = nullptr);
 
     [[nodiscard]] E min() const;

@@ -3,7 +3,6 @@
 
 #include <type_traits>
 #include <ostream>
-#include <cmath>
 #include <compare>
 
 template <typename T = long double , typename E = long double>

@@ -331,13 +331,19 @@ namespace errmath {
     }
 
     template <typename T, typename E>
-    auto sinh(const ErrorValue<T, E> &x);
+    auto sinh(const ErrorValue<T, E> &x) {
+        return ErrorValue(sinh(x.value), cosh(x.value)*x.error);
+    }
 
     template <typename T, typename E>
-    auto cosh(const ErrorValue<T, E> &x);
+    auto cosh(const ErrorValue<T, E> &x) {
+        return ErrorValue(cosh(x.value), abs(sinh(x.value))*x.error);
+    }
 
     template <typename T, typename E>
-    auto tanh(const ErrorValue<T, E> &x);
+    auto tanh(const ErrorValue<T, E> &x) {
+        return ErrorValue(tanh(x.value), x.error/pow(cosh(x.value, 2)));
+    }
 
     template <typename T, typename E>
     auto asinh(const ErrorValue<T, E> &x);

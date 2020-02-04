@@ -16,4 +16,13 @@
  *  see <https://www.gnu.org/licenses/>.
  */
 
+#include "gtest/gtest.h"
 
+#include "errc.h"
+
+const double ABSMAX = 0.000001;
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

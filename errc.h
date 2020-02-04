@@ -65,6 +65,8 @@ public:
 
     [[nodiscard]] E min() const;
     [[nodiscard]] E max() const;
+    [[nodiscard]] int getDefaultErrorCalculationMethod() const;
+    [[nodiscard]] std::function<E(T)> getDefaultErrorCalcFunction() const;
 
 protected:
 

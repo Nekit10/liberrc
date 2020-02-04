@@ -102,6 +102,21 @@ TEST(ErrorValueCompoundAssigmentOperators, AdditionOperatorTest) {
     ASSERT_NEAR(a.value, 12.52, ABSMAX);
 }
 
+
+
+TEST(ErrorValueCompoundAssigmentOperators, SubtructionOperatorTest) {
+    ErrorValue a(10.0, 12.4), b(2.0, 0.12);
+    a -= b;
+
+    ASSERT_NEAR(a.value, 8, ABSMAX);
+    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+
+    a -= 6;
+
+    ASSERT_NEAR(a.value, 2, ABSMAX);
+    ASSERT_NEAR(a.value, 12.52, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

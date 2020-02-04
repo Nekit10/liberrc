@@ -163,7 +163,9 @@ public:
                 throw std::range_error("ErrorValue index must be 0 or 1");
         }
     };
-    operator T() const;
+    explicit operator T() const {
+        return value;
+    };
 
     friend std::ostream& operator<<(std::ostream&, const ErrorValue<T,E> &);
 

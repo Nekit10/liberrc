@@ -80,7 +80,7 @@ TEST(ErrorValueAssigmentOperators, DoubleAssigmentOpertaor) {
     a = 0.03;
     ASSERT_EQ(a.value, 0.03) << "Setting value in assigment operator error";
     ASSERT_EQ(a.error, 0.005) << "Setting error (ErrorValue::DEF_ERROR_HALF) in assigment operator error";
-//
+
     a.setDefaultErrorCalculationMethod(ErrorValue<>::DEF_ERROR_FUNC, [](double x) -> double {
         return x/2;
     });

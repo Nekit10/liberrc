@@ -58,6 +58,7 @@ public:
 
     ErrorValue& operator=(T value_) {
         value = value_;
+        error = defaultNumberError(value_);
     }
 
     //------- COMPOUND ASSIGMENT OPERATORS -------

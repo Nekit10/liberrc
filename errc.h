@@ -302,7 +302,7 @@ namespace errmath {
 
     template <typename T, typename E>
     auto cos(const ErrorValue<T, E> &x) {
-        return ErrorValue(cos(x.value), abs(sin(x.value)*x.error);
+        return ErrorValue(cos(x.value), abs(sin(x.value)*x.error));
     }
 
     template <typename T, typename E>

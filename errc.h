@@ -55,14 +55,36 @@ public:
         value = value_;
     };
 
-    ErrorValue operator+=(const ErrorValue &ev);
-    ErrorValue operator+=(T value);
-    ErrorValue operator-=(const ErrorValue &ev);
-    ErrorValue operator-=(T value);
-    ErrorValue operator*=(const ErrorValue &ev);
-    ErrorValue operator*=(T value);
-    ErrorValue operator/=(const ErrorValue &ev);
-    ErrorValue operator/=(T value);
+    ErrorValue operator+=(const ErrorValue &ev) {
+        value += ev.value;
+        error += ev.error;
+    };
+    ErrorValue operator+=(T value_) {
+        *this += ErrorValue(value_, defaultNumberError(value_));
+    };
+    ErrorValue operator-=(const ErrorValue &ev) {
+        value -= ev.value;
+        error += ev.error;
+    }
+    ErrorValue operator-=(T value_) {
+        *this -= ErrorValue(value_, defaultNumberError(value_));
+    };
+    ErrorValue operator*=(const ErrorValue &ev) {
+        T oldV = value;
+        value *= ev.value;
+        error = value*(error/oldV + ev.error/ev.value);
+    };
+    ErrorValue operator*=(T value_) {
+        *this *= ErrorValue(value_, defaultNumberError(value_));
+    };
+    ErrorValue operator/=(const ErrorValue &ev) {
+        T oldV = value;
+        value /= ev.value;
+        error = value*(error/oldV + ev.error/ev.value);
+    };
+    ErrorValue operator/=(T value_) {
+        *this /= ErrorValue(value_, defaultNumberError(value_));
+    };
 
     ErrorValue operator+(const ErrorValue &ev) const;
     ErrorValue operator+(const T &value) const;

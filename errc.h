@@ -59,6 +59,7 @@ public:
     ErrorValue& operator=(T value_) {
         value = value_;
         error = defaultNumberError(value_);
+          return *this;
     }
 
     //------- COMPOUND ASSIGMENT OPERATORS -------
@@ -66,39 +67,47 @@ public:
     ErrorValue operator+=(const ErrorValue &ev) {
         value += ev.value;
         error += ev.error;
+        return *this;
     }
 
     ErrorValue operator+=(T value_) {
         *this += ErrorValue(value_, defaultNumberError(value_));
+        return *this;
     }
 
     ErrorValue operator-=(const ErrorValue &ev) {
         value -= ev.value;
         error += ev.error;
+        return *this;
     }
 
     ErrorValue operator-=(T value_) {
         *this -= ErrorValue(value_, defaultNumberError(value_));
+        return *this;
     }
 
     ErrorValue operator*=(const ErrorValue &ev) {
         T oldV = value;
         value *= ev.value;
         error = value*(error/oldV + ev.error/ev.value);
+        return *this;
     }
 
     ErrorValue operator*=(T value_) {
         *this *= ErrorValue(value_, defaultNumberError(value_));
+        return *this;
     }
 
     ErrorValue operator/=(const ErrorValue &ev) {
         T oldV = value;
         value /= ev.value;
         error = value*(error/oldV + ev.error/ev.value);
+        return *this;
     }
 
     ErrorValue operator/=(T value_) {
         *this /= ErrorValue(value_, defaultNumberError(value_));
+        return *this;
     }
 
     //------- ARITHMETIC OPERATORS -------

@@ -277,9 +277,11 @@ protected:
     }
 
     E halfErrorCalcFunction(T x) {
+        if (x == 0)
+            return 0.5;
         if (floor(x) == x) {
             long double c = 0;
-            while (x % 10 == 0) {
+            while (static_cast<long long>(x) % 10 == 0) {
                 c++;
                 x /= 10;
             }

@@ -327,7 +327,7 @@ namespace errmath {
 
     template <typename T, typename E, typename T1, typename E1>
     auto atan2(const ErrorValue<T, E> &y, const ErrorValue<T1, E1> &x) {
-        return tan(y/x);
+        return atan(y/x);
     }
 
     template <typename T, typename E>

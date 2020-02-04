@@ -153,7 +153,16 @@ public:
         return (value <=> ev.value);
     };
 
-    E operator[](int) const;
+    E operator[](int i) const {
+        switch(i) {
+            case 0:
+                return value;
+            case 1:
+                return error;
+            default:
+                throw std::range_error("ErrorValue index must be 0 or 1");
+        }
+    };
     operator T() const;
 
     friend std::ostream& operator<<(std::ostream&, const ErrorValue<T,E> &);

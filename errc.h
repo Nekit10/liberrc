@@ -191,8 +191,14 @@ public:
     [[nodiscard]] E max() const {
         return value + error;
     };
-    [[nodiscard]] int getDefaultErrorCalculationMethod() const;
-    [[nodiscard]] std::function<E(T)> getDefaultErrorCalcFunction() const;
+    [[nodiscard]] int getDefaultErrorCalculationMethod() const {
+        return numberDefaultErrorCode;
+    };
+    [[nodiscard]] std::function<E(T)> getDefaultErrorCalcFunction() const {
+        if (numberDefaultErrorCode != DEF_ERROR_FUNC)
+            return nullptr;
+        return defaultErrorCalcFunction;
+    };
 
 protected:
 

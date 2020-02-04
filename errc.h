@@ -311,13 +311,19 @@ namespace errmath {
     }
 
     template <typename T, typename E>
-    auto asin(const ErrorValue<T, E> &x);
+    auto asin(const ErrorValue<T, E> &x) {
+        return ErrorValue(asin(x.value), x.error/sqrt(1 - x.value*x.value));
+    }
 
     template <typename T, typename E>
-    auto acos(const ErrorValue<T, E> &x);
+    auto acos(const ErrorValue<T, E> &x) {
+        return ErrorValue(acos(x.value), x.error/sqrt(1 - x.value*x.value));
+    }
 
     template <typename T, typename E>
-    auto atan(const ErrorValue<T, E> &x);
+    auto atan(const ErrorValue<T, E> &x) {
+        return ErrorValue(atan(x.value), x.error/sqrt(1 + x.value*x.value));
+    }
 
     template <typename T, typename E>
     auto atan2(const ErrorValue<T, E> &x);

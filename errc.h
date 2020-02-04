@@ -418,16 +418,44 @@ namespace errmath {
     }
 
     template <typename T, typename E, typename T1, typename E1>
-    auto pow(const ErrorValue<T , E>& base, const ErrorValue<T1, E1>& exponent);
+    auto pow(const ErrorValue<T , E>& base, const ErrorValue<T1, E1>& exponent) {
+        T x = base.value, y = exponent.value;
+        T dx = base.error, dy = exponent.error;
+        return ErrorValue(
+                pow(x, y),
+                abs(y*pow(x, y - 1))*dx + abs(pow(x, y)*log(x))*dy
+                );
+    }
+
+    template <typename T, typename E, typename N>
+    auto pow(const ErrorValue<T , E>& base, N exponent) {
+        static_assert(std::is_arithmetic<N>::value && !std::is_same<N, bool>::value,
+                      "Type of exponent base value must be arithmetic, but not bool");
+        return ErrorValue(
+                pow(base.value, exponent),
+                abs(exponent*pow(base.value, exponent - 1))*base.error
+        );
+    }
 
     template <typename T, typename E>
-    auto sqrt(const ErrorValue<T, E> &x);
+    auto sqrt(const ErrorValue<T, E> &x) {
+        return ErrorValue(sqrt(x.value), x.error/2*sqrt(x.value));
+    }
 
     template <typename T, typename E>
-    auto cbrt(const ErrorValue<T, E> &x);
+    auto cbrt(const ErrorValue<T, E> &x) {
+        return ErrorValue(cbrt(x.value), x.error/3*cbrt(x.value));
+    }
 
     template <typename T, typename E, typename T1, typename E1>
-    auto hypot(const ErrorValue<T , E>& x, const ErrorValue<T1, E1>& y);
+    auto hypot(const ErrorValue<T , E>& x_, const ErrorValue<T1, E1>& y_) {
+        T x = x_.value, y = y_.value;
+        T dx = x_.error, dy = y_.error;
+        return ErrorValue(
+                hypot(x, y),
+                (x*dx + y*dy)/sqrt(x*x + y*y)
+                );
+    }
 
     template <typename T, typename E>
     auto erf(const ErrorValue<T, E> &x);

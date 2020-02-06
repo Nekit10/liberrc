@@ -17,7 +17,7 @@
  */
 
 #ifndef LIBERRC_ERRC_H
-#define LIBERRC_ERRC_
+#define LIBERRC_ERRC_H
 
 #include <type_traits>
 #include <ostream>

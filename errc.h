@@ -397,7 +397,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
     template <typename T, typename E>
     auto tanh(const ErrorValue<T, E> &x) {
-        return ErrorValue(tanh(x.value), x.error/pow(cosh(x.value, 2)));
+        return ErrorValue(tanh(x.value), x.error/pow(cosh(x.value), 2));
     }
 
     template <typename T, typename E>

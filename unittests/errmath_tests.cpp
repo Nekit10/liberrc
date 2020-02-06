@@ -64,6 +64,12 @@ TEST(TrigonometricFunctionsTests, ArcTan2) {
     ASSERT_NEAR(a.error, 0.128'649'457, ABSMAX);
 }
 
+TEST(HyperbolicTrigonometricFunctionsTests, Sinh) {
+    ErrorValue a = sinh(ErrorValue(1.23, 0.038));
+    ASSERT_NEAR(a.value, 1.564'468'479, ABSMAX);
+    ASSERT_NEAR(a.error, 0.070'556'900, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

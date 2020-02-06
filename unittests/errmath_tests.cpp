@@ -164,6 +164,12 @@ TEST(LogarithmicAndExponentalFunctionsTests, LogarithmBn) {
     ASSERT_NEAR(a.error, 0.008'251'595, ABSMAX);
 }
 
+TEST(PowerFunctionsTests, Pow) {
+    ErrorValue a = pow(ErrorValue(0.83, 0.038), 3.23);
+    ASSERT_NEAR(a.value, 0.547'800'265, ABSMAX);
+    ASSERT_NEAR(a.error, 0.081'008'439, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

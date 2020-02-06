@@ -40,6 +40,12 @@ TEST(TrigonometricFunctionsTests, Tan) {
     ASSERT_NEAR(a.error, 0.340'151'709, ABSMAX);
 }
 
+TEST(TrigonometricFunctionsTests, ArcSin) {
+    ErrorValue a = asin(ErrorValue(0.83, 0.038));
+    ASSERT_NEAR(a.value, 0.979'107'684, ABSMAX);
+    ASSERT_NEAR(a.error, 0.068'129'247, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

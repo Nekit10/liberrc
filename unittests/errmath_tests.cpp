@@ -22,8 +22,10 @@
 
 const double ABSMAX = 0.000001;
 
-TEST(Test, Test) {
-
+TEST(TrigonometricFunctionsTests, Sin) {
+    ErrorValue a = sin(ErrorValue(1.23, 0.038));
+    ASSERT_NEAR(a.value, 0.942'488'801, ABSMAX);
+    ASSERT_NEAR(a.error, 0.0127'010'336, ABSMAX);
 }
 
 int main(int argc, char **argv) {

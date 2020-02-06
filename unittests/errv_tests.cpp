@@ -267,6 +267,12 @@ TEST(ErrorValueVoidMethods, SetMethod) {
     ASSERT_NEAR(a.error, 69.666, ABSMAX);
 }
 
+TEST(ErrorValueNonVoidMethods, MinMaxMethods) {
+    ErrorValue a(10.2, 12.43);
+    ASSERT_NEAR(a.max(), 22.63, ABSMAX);
+    ASSERT_NEAR(a.min(), -2.23, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

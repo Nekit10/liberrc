@@ -106,6 +106,12 @@ TEST(ErrorFunctionsTests, ErrorFunction) {
     ASSERT_NEAR(a.error, 0.021'530'500, ABSMAX);
 }
 
+TEST(ErrorFunctionsTests, ComplementaryErrorFunction) {
+    ErrorValue a = erfc(ErrorValue(0.83, 0.038));
+    ASSERT_NEAR(a.value, 0.240'476'243, ABSMAX);
+    ASSERT_NEAR(a.error, 0.021'530'500, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

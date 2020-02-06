@@ -349,7 +349,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
 // CMath functions
 
-#ifndef LIBERRC_ADD_ERRMATH
+#ifndef LIBERRC_NOT_ADD_ERRMATH
 
 namespace errmath {
 

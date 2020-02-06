@@ -188,13 +188,13 @@ TEST(PowerFunctionsTests, Hypot) {
     ASSERT_NEAR(a.error, 0.408'552'664, ABSMAX);
 }
 
-TEST(PowerFunctionsTests, Fma) {
+TEST(OtherFunctionsTests, Fma) {
     ErrorValue a = fma(ErrorValue(0.83, 0.038), ErrorValue(1.34, 0.48), ErrorValue(1.45566, 1.2));
     ASSERT_NEAR(a.value, 2.567'860'000, ABSMAX);
     ASSERT_NEAR(a.error, 1.265'430'917, ABSMAX);
 }
 
-TEST(PowerFunctionsTests, Abs) {
+TEST(OtherFunctionsTests, Abs) {
     ErrorValue a(-0.234, 0.12345);
     ASSERT_NEAR(abs(a).value, 0.234, ABSMAX);
     ASSERT_NEAR(abs(a).error, 0.12345, ABSMAX);

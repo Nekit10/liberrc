@@ -170,6 +170,12 @@ TEST(PowerFunctionsTests, Pow) {
     ASSERT_NEAR(a.error, 0.081'008'439, ABSMAX);
 }
 
+TEST(PowerFunctionsTests, Sqrt) {
+    ErrorValue a = sqrt(ErrorValue(0.83, 0.038));
+    ASSERT_NEAR(a.value, 0.911'043'3579, ABSMAX);
+    ASSERT_NEAR(a.error, 0.020'855'209, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

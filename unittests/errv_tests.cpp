@@ -252,6 +252,13 @@ TEST(ErrorValueMemberOperators, MemberOperator) {
     ASSERT_THROW(a[2], std::range_error);
 }
 
+TEST(ErrorValueStaticCastConversionOperators, TStaticCastConversionOperator) {
+    ErrorValue a(10.2, 12.4);
+    ErrorValue b(4, 0.145);
+    ASSERT_NEAR(static_cast<double>(a), 10.2, ABSMAX);
+    ASSERT_EQ(static_cast<int>(b), 4);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

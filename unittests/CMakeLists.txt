@@ -7,4 +7,7 @@ add_subdirectory(lib)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} ../)
 
 add_executable(ErrorValueTests errv_tests.cpp ../errc.h)
+add_executable(ErrorValueMathTests errmath_tests.cpp ../errc.h)
+
 target_link_libraries(ErrorValueTests gtest gtest_main)
+target_link_libraries(ErrorValueMathTests gtest gtest_main)

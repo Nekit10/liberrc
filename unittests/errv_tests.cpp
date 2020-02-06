@@ -259,6 +259,14 @@ TEST(ErrorValueStaticCastConversionOperators, TStaticCastConversionOperator) {
     ASSERT_EQ(static_cast<int>(b), 4);
 }
 
+TEST(ErrorValueVoidMethods, SetMethod) {
+    ErrorValue<double , double> a;
+    a.set(24.245, 69.666);
+
+    ASSERT_NEAR(a.value, 25.245, ABSMAX);
+    ASSERT_NEAR(a.error, 69.666, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

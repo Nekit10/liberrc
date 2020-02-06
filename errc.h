@@ -507,10 +507,15 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
                 );
     }
 
+#ifdef LIBERRC_CPP2A_SUPPORT
+template <typename T, typename E, Arithmetic N>
+    auto pow(const ErrorValue<T , E>& base, N exponent) {
+#else
     template <typename T, typename E, typename N>
     auto pow(const ErrorValue<T , E>& base, N exponent) {
         static_assert(std::is_arithmetic<N>::value && !std::is_same<N, bool>::value,
                       "Type of exponent base value must be arithmetic, but not bool");
+#endif
         return ErrorValue(
                 pow(base.value, exponent),
                 abs(exponent*pow(base.value, exponent - 1))*base.error

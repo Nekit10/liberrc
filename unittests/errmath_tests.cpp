@@ -70,6 +70,12 @@ TEST(HyperbolicTrigonometricFunctionsTests, Sinh) {
     ASSERT_NEAR(a.error, 0.070'556'900, ABSMAX);
 }
 
+TEST(HyperbolicTrigonometricFunctionsTests, Cosh) {
+    ErrorValue a = cosh(ErrorValue(1.23, 0.038));
+    ASSERT_NEAR(a.value, 1.856'761'056, ABSMAX);
+    ASSERT_NEAR(a.error, 0.059'449'800, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

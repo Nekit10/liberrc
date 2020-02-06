@@ -188,6 +188,12 @@ TEST(PowerFunctionsTests, Hypot) {
     ASSERT_NEAR(a.error, 0.408'552'664, ABSMAX);
 }
 
+TEST(PowerFunctionsTests, Fma) {
+    ErrorValue a = fma(ErrorValue(0.83, 0.038), ErrorValue(1.34, 0.48), ErrorValue(1.45566, 1.2));
+    ASSERT_NEAR(a.value, 2.567'860'000, ABSMAX);
+    ASSERT_NEAR(a.error, 1.265'430'917, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

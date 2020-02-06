@@ -227,6 +227,24 @@ TEST(ErrorValueArithmeticOperators, DeccrementOperator) {
     ASSERT_NEAR((--a).error, 12.4, ABSMAX);
 }
 
+TEST(ErrorValueComparisonOperators, DefaultComparisonOperator) {
+    ErrorValue a(10.2, 12.4), b(10.1, 0.12), c(10.1, 22.0), d(-50.8, 12.3);
+
+    ASSERT_TRUE(a > b);
+    ASSERT_TRUE(a >= b);
+    ASSERT_TRUE(b == c);
+    ASSERT_TRUE(b >= c);
+    ASSERT_TRUE(b <= c);
+    ASSERT_TRUE(d <= c);
+    ASSERT_TRUE(d < c);
+
+    ASSERT_FALSE(a < b);
+    ASSERT_FALSE(a <= b);
+    ASSERT_FALSE(b != c);
+    ASSERT_FALSE(d >= c);
+    ASSERT_FALSE(d > c);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

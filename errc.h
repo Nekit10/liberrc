@@ -350,9 +350,6 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 // CMath functions
 
 #ifndef LIBERRC_NOT_ADD_ERRMATH
-
-namespace errmath {
-
     template <typename T, typename E>
     auto sin(const ErrorValue<T, E> &x) {
         return ErrorValue(sin(x.value), abs(cos(x.value))*x.error);
@@ -551,8 +548,6 @@ namespace errmath {
         T dx = x_.error, dy = y_.error, dz = z_.error;
         return ErrorValue(fma(x, y, z), abs(y)*dx + abs(x)*dy + dz);
     };
-}
-
-#endif //LIBERRC_ADD_ERRMATH
+//}
 
 #endif //LIBERRC_ERRC_H

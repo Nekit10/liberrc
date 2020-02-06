@@ -273,6 +273,18 @@ TEST(ErrorValueNonVoidMethods, MinMaxMethods) {
     ASSERT_NEAR(a.min(), -2.23, ABSMAX);
 }
 
+TEST(ErrorValueNonVoidMethods, GettingDefaultErrorCalcMethodMethods) {
+    ErrorValue a(10.2, 12.43);
+    a.setDefaultErrorCalculationMethod(ErrorValue<>::DEF_ERROR_HALF);
+    ASSERT_EQ(a.getDefaultErrorCalculationMethod(), ErrorValue<>::DEF_ERROR_HALF);
+    ASSERT_EQ(a.getDefaultErrorCalcFunction(), nullptr);
+
+    a.setDefaultErrorCalculationMethod(ErrorValue<>::DEF_ERROR_FUNC, [](double) -> double { return 5;});
+    ASSERT_EQ(a.getDefaultErrorCalculationMethod(), ErrorValue<>::DEF_ERROR_FUNC);
+    ASSERT_NE(a.getDefaultErrorCalcFunction(), nullptr);
+    ASSERT_NEAR(a.getDefaultErrorCalcFunction()(18), 5, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

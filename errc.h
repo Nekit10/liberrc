@@ -29,9 +29,7 @@
 
 template<typename T>
 concept Arithmetic = std::is_arithmetic_v<T> && !std::is_same_v<T, bool>;
-#endif
 
-#ifdef LIBERRC_CPP2A_SUPPORT
 template <Arithmetic T = long double , std::floating_point E = long double>
 class ErrorValue {
 

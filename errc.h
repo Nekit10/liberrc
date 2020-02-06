@@ -362,7 +362,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
     template <typename T, typename E>
     auto tan(const ErrorValue<T, E> &x) {
-        return ErrorValue(tan(x.value), x.error/pow(cos(x.value, 2)));
+        return ErrorValue(tan(x.value), x.error/pow(cos(x.value), 2));
     }
 
     template <typename T, typename E>

@@ -34,6 +34,12 @@ TEST(TrigonometricFunctionsTests, Cos) {
     ASSERT_NEAR(a.error, 0.035'814'574, ABSMAX);
 }
 
+TEST(TrigonometricFunctionsTests, Tan) {
+    ErrorValue a = tan(ErrorValue(1.23, 0.038));
+    ASSERT_NEAR(a.value, 2.819'815'734, ABSMAX);
+    ASSERT_NEAR(a.error, 0.340'151'709, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

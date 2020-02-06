@@ -130,6 +130,12 @@ TEST(LogarithmicAndExponentalFunctionsTests, Exponenta2) {
     ASSERT_NEAR(a.error, 0.232'197'596, ABSMAX);
 }
 
+TEST(LogarithmicAndExponentalFunctionsTests, LogarithmB2) {
+    ErrorValue a = log2(ErrorValue(0.83, 0.038));
+    ASSERT_NEAR(a.value, -0.268'816'758, ABSMAX);
+    ASSERT_NEAR(a.error, 0.066'051'098, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

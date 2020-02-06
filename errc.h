@@ -22,9 +22,9 @@
 #include <type_traits>
 #include <ostream>
 #include <cmath>
-#include <compare>
 
 #ifdef LIBERRC_CPP2A_SUPPORT
+#include <compare>
 #include <concepts>
 
 template<typename T>

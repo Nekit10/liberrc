@@ -58,6 +58,12 @@ TEST(TrigonometricFunctionsTests, ArcTan) {
     ASSERT_NEAR(a.error, 0.0224'998'519, ABSMAX);
 }
 
+TEST(TrigonometricFunctionsTests, ArcTan2) {
+    ErrorValue a = atan2(ErrorValue(0.83, 0.038), ErrorValue(0.43, 0.134));
+    ASSERT_NEAR(a.value, 1.092'795'636, ABSMAX);
+    ASSERT_NEAR(a.error, 0.128'649'457, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

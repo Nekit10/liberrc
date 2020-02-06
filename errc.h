@@ -550,4 +550,6 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
     };
 //}
 
+#endif //LIBERRC_ADD_ERRMATH
+
 #endif //LIBERRC_ERRC_H

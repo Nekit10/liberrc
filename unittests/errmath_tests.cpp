@@ -28,6 +28,12 @@ TEST(TrigonometricFunctionsTests, Sin) {
     ASSERT_NEAR(a.error, 0.0127'010'336, ABSMAX);
 }
 
+TEST(TrigonometricFunctionsTests, Cos) {
+    ErrorValue a = cos(ErrorValue(1.23, 0.038));
+    ASSERT_NEAR(a.value, 0.334'237'727, ABSMAX);
+    ASSERT_NEAR(a.error, 0.035'814'574, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

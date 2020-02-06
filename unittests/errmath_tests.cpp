@@ -100,6 +100,12 @@ TEST(HyperbolicTrigonometricFunctionsTests, ArcTanh) {
     ASSERT_NEAR(a.error, 0.122'147'000, ABSMAX);
 }
 
+TEST(ErrorFunctionsTests, ErrorFunction) {
+    ErrorValue a = erf(ErrorValue(0.83, 0.038));
+    ASSERT_NEAR(a.value, 0.759'523'756, ABSMAX);
+    ASSERT_NEAR(a.error, 0.021'530'500, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

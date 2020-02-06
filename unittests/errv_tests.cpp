@@ -207,6 +207,26 @@ TEST(ErrorValueArithmeticOperators, UnaryMinus) {
     ASSERT_NEAR((-a).error, 12.4, ABSMAX);
 }
 
+TEST(ErrorValueArithmeticOperators, IncrementOperator) {
+    ErrorValue a(10.2, 12.4);
+
+    ASSERT_NEAR((a++).value, 10.2, ABSMAX);
+    ASSERT_NEAR((a++).error, 12.4, ABSMAX);
+
+    ASSERT_NEAR((++a).value, 13.2, ABSMAX);
+    ASSERT_NEAR((++a).error, 12.4, ABSMAX);
+}
+
+TEST(ErrorValueArithmeticOperators, DeccrementOperator) {
+    ErrorValue a(10.2, 12.4);
+
+    ASSERT_NEAR((a--).value, 10.2, ABSMAX);
+    ASSERT_NEAR((a--).error, 12.4, ABSMAX);
+
+    ASSERT_NEAR((--a).value, 7.2, ABSMAX);
+    ASSERT_NEAR((--a).error, 12.4, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

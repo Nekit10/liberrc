@@ -94,6 +94,12 @@ TEST(HyperbolicTrigonometricFunctionsTests, ArcCosh) {
     ASSERT_NEAR(a.error, 0.057'287'200, ABSMAX);
 }
 
+TEST(HyperbolicTrigonometricFunctionsTests, ArcTanh) {
+    ErrorValue a = atanh(ErrorValue(0.83, 0.038));
+    ASSERT_NEAR(a.value, 1.188'136'404, ABSMAX);
+    ASSERT_NEAR(a.error, 0.122'147'000, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

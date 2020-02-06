@@ -141,6 +141,72 @@ TEST(ErrorValueCompoundAssigmentOperators, DivisionOperatorTest) {
     ASSERT_NEAR(a.value, 12.415'093'394'735, ABSMAX);
 }
 
+TEST(ErrorValueArithmeticOperators, AdditionOperatorTest) {
+    ErrorValue a(10.0, 12.4), b(2.0, 0.12);
+    a = a + b;
+
+    ASSERT_NEAR(a.value, 12, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
+
+    a = a + 6;
+
+    ASSERT_NEAR(a.value, 18, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
+}
+
+TEST(ErrorValueArithmeticOperators, SubtructionOperatorTest) {
+    ErrorValue a(10.0, 12.4), b(2.0, 0.12);
+    a = a - b;
+
+    ASSERT_NEAR(a.value, 8, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
+
+    a = a - 6;
+
+    ASSERT_NEAR(a.value, 2, ABSMAX);
+    ASSERT_NEAR(a.error, 12.400'580'631'567, ABSMAX);
+}
+
+TEST(ErrorValueArithmeticOperators, MultiplicationOperatorTest) {
+    ErrorValue a(10.2, 12.4), b(2.0, 0.12);
+    a = a * b;
+
+    ASSERT_NEAR(a.value, 20.4, ABSMAX);
+    ASSERT_NEAR(a.error, 24.830'186'789'470, ABSMAX);
+
+    a = a * 2;
+
+    ASSERT_NEAR(a.value, 40.8, ABSMAX);
+    ASSERT_NEAR(a.error, 49.660'373'578'941, ABSMAX);
+}
+
+TEST(ErrorValueArithmeticOperators, DivisionOperatorTest) {
+    ErrorValue a(10.2, 12.4), b(2.0, 0.12);
+    a = a / b;
+
+    ASSERT_NEAR(a.value, 5.1, ABSMAX);
+    ASSERT_NEAR(a.error, 24.830'186'789'470, ABSMAX);
+
+    a = a / 2;
+
+    ASSERT_NEAR(a.value, 2.55, ABSMAX);
+    ASSERT_NEAR(a.value, 12.415'093'394'735, ABSMAX);
+}
+
+TEST(ErrorValueArithmeticOperators, UnaryPlus) {
+    ErrorValue a(10.2, 12.4);
+
+    ASSERT_NEAR((+a).value, 10.2, ABSMAX);
+    ASSERT_NEAR((+a).error, 12.4, ABSMAX);
+}
+
+TEST(ErrorValueArithmeticOperators, UnaryMinus) {
+    ErrorValue a(10.2, 12.4);
+
+    ASSERT_NEAR((-a).value, -10.2, ABSMAX);
+    ASSERT_NEAR((-a).error, 12.4, ABSMAX);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

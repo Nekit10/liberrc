@@ -245,6 +245,13 @@ TEST(ErrorValueComparisonOperators, DefaultComparisonOperator) {
     ASSERT_FALSE(d > c);
 }
 
+TEST(ErrorValueMemberOperators, MemberOperator) {
+    ErrorValue a(10.2, 12.4);
+    ASSERT_NEAR(a[0], 10.2, ABSMAX );
+    ASSERT_NEAR(a[1], 12.4, ABSMAX);
+    ASSERT_THROW(a[2], std::range_error);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

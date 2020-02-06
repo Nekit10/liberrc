@@ -17,13 +17,25 @@
  */
 
 #ifndef LIBERRC_ERRC_H
-#define LIBERRC_ERRC_H
+#define LIBERRC_ERRC_
 
 #include <type_traits>
 #include <ostream>
 #include <cmath>
 #include <compare>
 
+#ifdef LIBERRC_CPP2A_SUPPORT
+#include <concepts>
+
+template<typename T>
+concept Arithmetic = std::is_arithmetic_v<T> && !std::is_same_v<T, bool>;
+#endif
+
+#ifdef LIBERRC_CPP2A_SUPPORT
+template <Arithmetic T = long double , std::floating_point E = long double>
+class ErrorValue {
+
+#else
 template <typename T = long double , typename E = long double>
 class ErrorValue {
 
@@ -31,6 +43,8 @@ class ErrorValue {
             "Type of ErrorValue value must be arithmetic, but not bool");
     static_assert(std::is_floating_point<E>::value,
                   "Type of ErrorValue error value must be float, double or long double");
+
+#endif
 
 public:
 
@@ -169,7 +183,8 @@ public:
     }
 
     ErrorValue& operator++() {
-        return (*this += 1);
+        value++;
+        return *this;
     }
 
     const ErrorValue operator++(int) {
@@ -179,7 +194,8 @@ public:
     }
 
     ErrorValue& operator--() {
-        return (*this -= 1);
+        value--;
+        return *this;
     }
 
     const ErrorValue operator--(int) {
@@ -190,9 +206,38 @@ public:
 
     //------- COMPARISON OPERATORS -------
 
+#ifdef LIBERRC_CPP2A_SUPPORT
     std::weak_ordering operator<=>(const ErrorValue  &ev) const {
         return (value <=> ev.value);
     }
+#else
+
+    bool operator<(const ErrorValue &ev) {
+        return value < ev.value;
+    }
+
+    bool operator<=(const ErrorValue &ev) {
+        return value <= ev.value;
+    }
+
+    bool operator==(const ErrorValue &ev) {
+        return value = ev.value;
+    }
+
+    bool operator>=(const ErrorValue &ev) {
+        return value >= ev.value;
+    }
+
+    bool operator>(const ErrorValue &ev) {
+        return value > ev.value;
+    }
+
+    bool operator!=(const ErrorValue &ev) {
+        return value != ev.value;
+    }
+
+#endif
+
 
     //------- MEMBER OPERATORS -------
 
@@ -426,22 +471,31 @@ namespace errmath {
         return ErrorValue(log1p(x.value), x.error/log(1 + x.value));
     }
 
+#ifdef LIBERRC_CPP2A_SUPPORT
+    template <std::floating_point T, std::floating_point E, Arithmetic N>
+    ErrorValue<T, E> logn(ErrorValue<T , E> x, N n) {
+#else
     template <typename T, typename E, typename N>
     typename std::enable_if<std::is_floating_point<T>::value, ErrorValue<T, E>>::type
     logn(ErrorValue<T , E> x, N n) {
-        static_assert(std::is_integral<N>::value,
+        static_assert(std::is_arithmetic<N>::value,
                       "Type of logn base value must be integral");
+#endif
         return ErrorValue<T, E>(
                 log(x.value)/log(n),
                 x.error/(x.value*log(n))
                 );
     }
-
+#ifdef LIBERRC_CPP2A_SUPPORT
+    template <std::integral T, std::floating_point E, Arithmetic N>
+    ErrorValue<double, E> logn(ErrorValue<T , E> x, N n) {
+#else
     template <typename T, typename E, typename N>
     typename std::enable_if<std::is_integral<T>::value, ErrorValue<double , E>>::type
     logn(ErrorValue<T , E> x, N n) {
         static_assert(std::is_integral<N>::value,
                       "Type of logn base value must be integral");
+#endif
         return ErrorValue<double , E>(
                 log(x.value)/log(n),
                 x.error/(x.value*log(n))

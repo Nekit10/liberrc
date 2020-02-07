@@ -138,7 +138,7 @@ TEST(ErrorValueCompoundAssigmentOperators, DivisionOperatorTest) {
     a /= 2;
 
     ASSERT_NEAR(a.value, 2.55, ABSMAX);
-    ASSERT_NEAR(a.value, 12.415'093'394'735, ABSMAX);
+    ASSERT_NEAR(a.value, 3.103'773'348'683, ABSMAX);
 }
 
 TEST(ErrorValueArithmeticOperators, AdditionOperatorTest) {

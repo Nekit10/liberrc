@@ -379,7 +379,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
     template <typename T, typename E>
     auto atan(const ErrorValue<T, E> &x) {
-        return ErrorValue(atan(x.value), x.error/sqrt(1 + x.value*x.value));
+        return ErrorValue(atan(x.value), x.error/(1 + x.value*x.value));
     }
 
     template <typename T, typename E, typename T1, typename E1>

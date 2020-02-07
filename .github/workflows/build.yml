@@ -1,4 +1,4 @@
-name: CI: Google Tests run
+name: CI - Google Tests run
 
 on: [push, pull_request]
 

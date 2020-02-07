@@ -78,7 +78,7 @@ public:
 
     ErrorValue operator+=(const ErrorValue &ev) {
         value += ev.value;
-        error += ev.error;
+        error = sqrt(error*error + ev.error*ev.error);
         return *this;
     }
 
@@ -89,7 +89,7 @@ public:
 
     ErrorValue operator-=(const ErrorValue &ev) {
         value -= ev.value;
-        error += ev.error;
+        error = sqrt(error*error + ev.error*ev.error);
         return *this;
     }
 
@@ -99,9 +99,10 @@ public:
     }
 
     ErrorValue operator*=(const ErrorValue &ev) {
-        T oldV = value;
+        E e1 = error/value;
+        E e2 = ev.error/ev.value;
         value *= ev.value;
-        error = value*(error/oldV + ev.error/ev.value);
+        error = value*sqrt(e1*e1 + e2*e2);
         return *this;
     }
 
@@ -111,9 +112,10 @@ public:
     }
 
     ErrorValue operator/=(const ErrorValue &ev) {
-        T oldV = value;
+        E e1 = error/value;
+        E e2 = ev.error/ev.value;
         value /= ev.value;
-        error = value*(error/oldV + ev.error/ev.value);
+        error = value*sqrt(e1*e1 + e2*e2);
         return *this;
     }
 

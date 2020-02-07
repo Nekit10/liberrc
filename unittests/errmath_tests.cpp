@@ -143,7 +143,7 @@ TEST(LogarithmicAndExponentalFunctionsTests, LogarithmBe) {
 }
 
 TEST(LogarithmicAndExponentalFunctionsTests, Exponentam1) {
-    ErrorValue a = log(ErrorValue(0.83, 0.038));
+    ErrorValue a = expm1(ErrorValue(0.83, 0.038));
     ASSERT_NEAR(a.value, 1.293'318'740, ABSMAX);
     ASSERT_NEAR(a.error, 0.087'146'112, ABSMAX);
 }

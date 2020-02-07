@@ -20,6 +20,7 @@
 #define LIBERRC_ERRC_H
 
 #include <type_traits>
+#include <iomanip>
 #include <ostream>
 #include <cmath>
 
@@ -342,7 +343,7 @@ protected:
 
 template <typename T, typename E>
 std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
-    os << ev.value << " ± " << ev.error;
+    os << std::fixed << std::setprecision(5) <<  ev.value << " ± " << std::fixed << std::setprecision(5) << ev.error;
     return os;
 }
 

@@ -1,0 +1,30 @@
+name: CI - Google Tests run
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Checkout submodules
+      uses: srt32/git-actions@v0.0.3
+      with:
+        args: git submodule update --init --recursive
+      
+    - name: configure
+      run: |
+        mkdir build
+        
+    - name: errorvalue-gtest
+      uses: CyberZHG/github-action-gtest@0.0.1
+      with:
+        args: "-d unittests -e ErrorValueTests"
+ 
+    - name: math-gtest
+      uses: CyberZHG/github-action-gtest@0.0.1
+      with:
+        args: "-d unittests -e ErrorValueMathTests"

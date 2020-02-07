@@ -113,7 +113,7 @@ TEST(ErrorFunctionsTests, ComplementaryErrorFunction) {
 }
 
 TEST(LogarithmicAndExponentalFunctionsTests, Exponenta) {
-    ErrorValue a = erfc(ErrorValue(0.83, 0.038));
+    ErrorValue a = exp(ErrorValue(0.83, 0.038));
     ASSERT_NEAR(a.value, 2.293'318'740, ABSMAX);
     ASSERT_NEAR(a.error, 0.087'146'112, ABSMAX);
 }

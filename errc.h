@@ -505,7 +505,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
         T dx = base.error, dy = exponent.error;
         return ErrorValue(
                 pow(x, y),
-                abs(y*pow(x, y - 1))*dx + abs(pow(x, y)*log(x))*dy
+                sqrt(pow(y*pow(x, y - 1)*dx, 2) + pow(pow(x, y)*log(x)*dy, 2))
                 );
     }
 
@@ -540,7 +540,7 @@ template <typename T, typename E, Arithmetic N>
         T dx = x_.error, dy = y_.error;
         return ErrorValue(
                 hypot(x, y),
-                (x*dx + y*dy)/sqrt(x*x + y*y)
+                sqrt(pow(x*dx, 2) + pow(y*dy, 2))/sqrt(x*x + y*y)
                 );
     }
 
@@ -552,8 +552,10 @@ template <typename T, typename E, Arithmetic N>
     template <typename T, typename E, typename T1, typename E1, typename T2, typename E2>
     auto fma(const ErrorValue<T, E> &x_, const ErrorValue<T1, E1> &y_, const ErrorValue<T2, E2> &z_) {
         T x = x_.value, y = y_.value, z = z_.value;
-        T dx = x_.error, dy = y_.error, dz = z_.error;
-        return ErrorValue(fma(x, y, z), abs(y)*dx + abs(x)*dy + dz);
+        E dx = x_.error, dy = y_.error, dz = z_.error;
+        E ex = dx/x;
+        E ey = dy/y;
+        return ErrorValue(fma(x, y, z), sqrt(x*y*(ex*ex + ey*ey) * dz*dx));
     };
 //}
 

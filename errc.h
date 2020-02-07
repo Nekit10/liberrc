@@ -555,7 +555,7 @@ template <typename T, typename E, Arithmetic N>
         E dx = x_.error, dy = y_.error, dz = z_.error;
         E ex = dx/x;
         E ey = dy/y;
-        return ErrorValue(fma(x, y, z), sqrt(x*y*(ex*ex + ey*ey) * dz*dx));
+        return ErrorValue(fma(x, y, z), sqrt(x*x*y*y*(ex*ex + ey*ey) + dz*dz));
     };
 //}
 

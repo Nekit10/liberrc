@@ -2,7 +2,7 @@
 With liberrc you can easily find accuracy of calculations. Liberrc is a C++ library that implements ErrorValue class, which
 automatically calculates error. Also, there are implementation of <cmath> functions for ErrorValue.
 ## Download latest version
-You can download liberrc v1.0-beta [here](https://github.com/ITGrusha/liberrc/releases/tag/v1.0-beta)
+You can download liberrc v1.0-beta [here](https://github.com/Nekit10/liberrc/releases/tag/v1.0-beta)
 ## C++ standart and compilers support
 This lib is written in C++17, but has some code in C++2a. You can turn experimental C++2a code using
  ```-D LIBERRC_CPP2A_SUPPORT``` compiler argument, but **C++2a code has not been tested**. Any compiler at the

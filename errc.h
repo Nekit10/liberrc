@@ -556,8 +556,7 @@ template <typename T, typename E, Arithmetic N>
         E ex = dx/x;
         E ey = dy/y;
         return ErrorValue(fma(x, y, z), sqrt(x*x*y*y*(ex*ex + ey*ey) + dz*dz));
-    };
-//}
+    }
 
 #endif //LIBERRC_ADD_ERRMATH
 

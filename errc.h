@@ -309,13 +309,10 @@ protected:
         switch (numberDefaultErrorCode) {
             case DEF_ERROR_ZERO:
                 return 0;
-                break;
             case DEF_ERROR_HALF:
                 return halfErrorCalcFunction(x);
-                break;
                 [[unlikely]] case DEF_ERROR_FUNC:
                 return defaultErrorCalcFunction(x);
-                break;
             default:
                 throw std::range_error("Invalid default error function code: " + std::to_string(numberDefaultErrorCode));
         }

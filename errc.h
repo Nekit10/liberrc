@@ -465,7 +465,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
     template <typename T, typename E>
     auto log1p(const ErrorValue<T, E> &x) {
-        return ErrorValue(log1p(x.value), x.error/log(1 + x.value));
+        return ErrorValue(log1p(x.value), x.error/(1 + x.value));
     }
 
 #ifdef LIBERRC_CPP2A_SUPPORT

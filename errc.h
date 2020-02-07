@@ -531,7 +531,7 @@ template <typename T, typename E, Arithmetic N>
 
     template <typename T, typename E>
     auto cbrt(const ErrorValue<T, E> &x) {
-        return ErrorValue(cbrt(x.value), x.error/(3*cbrt(x.value)));
+        return ErrorValue(cbrt(x.value), x.error/(3*pow(x.value, 2.0/3)));
     }
 
     template <typename T, typename E, typename T1, typename E1>

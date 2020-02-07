@@ -263,7 +263,7 @@ TEST(ErrorValueVoidMethods, SetMethod) {
     ErrorValue<double , double> a;
     a.set(24.245, 69.666);
 
-    ASSERT_NEAR(a.value, 25.245, ABSMAX);
+    ASSERT_NEAR(a.value, 24.245, ABSMAX);
     ASSERT_NEAR(a.error, 69.666, ABSMAX);
 }
 

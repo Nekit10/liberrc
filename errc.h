@@ -526,12 +526,12 @@ template <typename T, typename E, Arithmetic N>
 
     template <typename T, typename E>
     auto sqrt(const ErrorValue<T, E> &x) {
-        return ErrorValue(sqrt(x.value), x.error/2*sqrt(x.value));
+        return ErrorValue(sqrt(x.value), x.error/(2*sqrt(x.value)));
     }
 
     template <typename T, typename E>
     auto cbrt(const ErrorValue<T, E> &x) {
-        return ErrorValue(cbrt(x.value), x.error/3*cbrt(x.value));
+        return ErrorValue(cbrt(x.value), x.error/(3*cbrt(x.value)));
     }
 
     template <typename T, typename E, typename T1, typename E1>

@@ -185,12 +185,12 @@ TEST(ErrorValueArithmeticOperators, DivisionOperatorTest) {
     a = a / b;
 
     ASSERT_NEAR(a.value, 5.1, ABSMAX);
-    ASSERT_NEAR(a.error, 24.830'186'789'470, ABSMAX);
+    ASSERT_NEAR(a.error, 6.207'546'697'367, ABSMAX);
 
     a = a / 2;
 
     ASSERT_NEAR(a.value, 2.55, ABSMAX);
-    ASSERT_NEAR(a.error, 12.415'093'394'735, ABSMAX);
+    ASSERT_NEAR(a.error, 3.103'773'348'683, ABSMAX);
 }
 
 TEST(ErrorValueArithmeticOperators, UnaryPlus) {

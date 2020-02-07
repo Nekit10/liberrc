@@ -13,4 +13,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unittests
 
 [Unreleased]: https://github.com/Nekit10/liberrc/compare/master...develop
-[1.0-beta]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v1.0-beta
+[1.0-beta]: https://github.com/Nekit10/liberrc/releases/tag/v1.0-beta

@@ -342,7 +342,7 @@ protected:
 
 template <typename T, typename E>
 std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
-    os << ev.value << " ± " + ev.error;
+    os << ev.value << " ± " << ev.error;
     return os;
 }
 

@@ -64,8 +64,8 @@ public:
     ErrorValue& operator=(const ErrorValue &ev) {
         if (&ev != this) {
             value = ev.value, error = ev.error;
-            return *this;
         }
+        return *this;
     }
 
     ErrorValue& operator=(T value_) {

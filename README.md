@@ -2,14 +2,30 @@
 With liberrc you can easily find accuracy of calculations. Liberrc is a C++ library that implements ErrorValue class, which
 automatically calculates error. Also, there are implementation of <cmath> functions for ErrorValue.
 ## Download latest version
-liberrc don't have stable versions yet, you can find the latest version [here](https://github.com/Nekit10/liberrc/tree/develop)
+You can download liberrc v1.0-beta [here](https://github.com/ITGrusha/liberrc/releases/tag/v1.0-beta)
+## C++ standart and compilers support
+This lib is written in C++17, but has some code in C++2a. You can turn experimental C++2a code using
+ ```-D LIBERRC_CPP2A_SUPPORT``` compiler argument, but **C++2a code has not been tested**. Any compiler at the
+moment (febrary 2020) does not support this code.
+C++2a features used:
+* Concepts
+* Consistent comparison (operator<=>)	
+* [[nodiscard]] with class constructors
+* [[unlikely]] attribute
+  
+You probably will be able to compile C++2a version with g++ 10.0.
+C++17 version could be compiled with g++ 8.0+ or clang 10.0+, but tested only with g++ 9.2 and clang 11.0.
 ## Features
 * ErrorValue class can work with value with any C++ arithmetic type except bool, error can be float, double or long double
 * All default C++ arithmetic operators are overloaded in ErrorValue
+* Passing ErrorValue class to std::ostream
 * Almost all <cmath> functions have own version which work with ErrorValue
 ## Planned features
 * ErrorValue for complex numbers (std::complex) (v2)
 * Supporting more accurate types than long double (v3)
+## Using library
+To include library just put "errc.h" file into your project's folder and include it. Library is header-only.
+For more info see [wiki](https://github.com/Nekit10/liberrc/wiki).
 ## Contribution
 You can freely contribute to our github. There're many things you can do: fix bugs, add new features. Please follow several simple rules:
 * **DO NOT** commit to master, use develop or create your own branch instead
@@ -28,9 +44,10 @@ You can freely contribute to our github. There're many things you can do: fix bu
 * Add your name to list of contributors in end of this file
 
 Also, feel free to update or translate project's [GitHub wiki](https://github.com/Nekit10/liberrc/wiki) or send your
-ideas and proposals to my email, you can find it below.
+ideas and proposals [here](https://github.com/Nekit10/liberrc/issues/new?assignees=Nekit10&labels=enhancement&template=feature_request.md&title=).
 ## License
 ![GNU LGPL v3 logo](https://www.gnu.org/graphics/lgplv3-with-text-154x68.png)
+
 liberrc is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as
 published by the Free Software Foundation, either version 3 of

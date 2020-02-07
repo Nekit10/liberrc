@@ -9,7 +9,6 @@ liberrc is new project, so all existing release versions are supported with secu
 | 1.x       | :white_check_mark: |
 | x.y.z-beta| :x:                |
 | x.y.z-dev | :x:                |
-| 0.x.y     | :x:                |
 
 ## Reporting a Vulnerability
 

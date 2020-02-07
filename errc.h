@@ -46,9 +46,9 @@ class ErrorValue {
 
 public:
 
-    static const int DEF_ERROR_ZERO = 0;
-    static const int DEF_ERROR_HALF = 1;
-    static const int DEF_ERROR_FUNC = 2;
+    static constexpr int DEF_ERROR_ZERO = 0;
+    static constexpr int DEF_ERROR_HALF = 1;
+    static constexpr int DEF_ERROR_FUNC = 2;
 
     T value;
     E error;

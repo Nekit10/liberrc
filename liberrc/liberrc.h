@@ -59,9 +59,9 @@ public:
 
     //------- CONSTRUCTORS -------
 
-    [[nodiscard]] ErrorValue() = default;
-    [[nodiscard]] ErrorValue(const ErrorValue &ev) = default;
-    [[nodiscard]] ErrorValue(T value_, E error_) : value(value_), error(error_) {};
+    [[nodiscard]] constexpr ErrorValue() = default;
+    [[nodiscard]] constexpr ErrorValue(const ErrorValue &ev) = default;
+    [[nodiscard]] constexpr ErrorValue(T value_, E error_) : value(value_), error(error_) {};
 
     //------- ASSIGMENT OPERATORS -------
 
@@ -191,6 +191,8 @@ public:
         return *this;
     }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "readability-const-return-type"
     const ErrorValue operator++(int) {
         ErrorValue tmp(*this);
         ++(*this);
@@ -207,12 +209,13 @@ public:
         --(*this);
         return tmp;
     }
+#pragma clang diagnostic pop
 
     //------- COMPARISON OPERATORS -------
 
 #if defined(__cpp_impl_three_way_comparison) && defined(__cpp_lib_three_way_comparison)
-    std::weak_ordering operator<=>(const ErrorValue  &ev) const {
-        return (value <=> ev.value);
+    auto operator<=>(const ErrorValue<T, E> &ev) const {
+        return value <=> ev.value;
     }
 #else
 
@@ -223,11 +226,6 @@ public:
     bool operator<=(const ErrorValue &ev) {
         return value <= ev.value;
     }
-
-    bool operator==(const ErrorValue &ev) {
-        return value = ev.value;
-    }
-
     bool operator>=(const ErrorValue &ev) {
         return value >= ev.value;
     }
@@ -236,11 +234,15 @@ public:
         return value > ev.value;
     }
 
+#endif
+
+    bool operator==(const ErrorValue &ev) {
+        return value = ev.value;
+    }
+
     bool operator!=(const ErrorValue &ev) {
         return value != ev.value;
     }
-
-#endif
 
 
     //------- MEMBER OPERATORS -------
@@ -315,7 +317,7 @@ protected:
                 return 0;
             case DEF_ERROR_HALF:
                 return halfErrorCalcFunction(x);
-                [[unlikely]] case DEF_ERROR_FUNC:
+            [[unlikely]] case DEF_ERROR_FUNC:
                 return defaultErrorCalcFunction(x);
             default:
                 throw std::range_error("Invalid default error function code: " + std::to_string(numberDefaultErrorCode));

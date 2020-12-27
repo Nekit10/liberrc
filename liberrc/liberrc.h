@@ -333,14 +333,14 @@ protected:
                 c++;
                 x /= 10;
             }
-            return 5*pow(10, --c);
+            return 5*std::pow(10, --c);
         } else {
             long double c = 0;
             while (floor(x) != x) {
                 c++;
                 x *= 10;
             }
-            return 5*pow(10, -c-1);
+            return 5*std::pow(10, -c-1);
         }
     }
 
@@ -357,32 +357,32 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 #ifndef LIBERRC_NOT_ADD_ERRMATH
     template <typename T, typename E>
     auto sin(const ErrorValue<T, E> &x) {
-        return ErrorValue(sin(x.value), abs(cos(x.value))*x.error);
+        return ErrorValue(std::sin(x.value), std::abs(std::cos(x.value))*x.error);
     }
 
     template <typename T, typename E>
     auto cos(const ErrorValue<T, E> &x) {
-        return ErrorValue(cos(x.value), abs(sin(x.value)*x.error));
+        return ErrorValue(std::cos(x.value), std::abs(std::sin(x.value)*x.error));
     }
 
     template <typename T, typename E>
     auto tan(const ErrorValue<T, E> &x) {
-        return ErrorValue(tan(x.value), x.error/pow(cos(x.value), 2));
+        return ErrorValue(std::tan(x.value), x.error/std::pow(std::cos(x.value), 2));
     }
 
     template <typename T, typename E>
     auto asin(const ErrorValue<T, E> &x) {
-        return ErrorValue(asin(x.value), x.error/sqrt(1 - x.value*x.value));
+        return ErrorValue(std::asin(x.value), x.error/std::sqrt(1 - x.value*x.value));
     }
 
     template <typename T, typename E>
     auto acos(const ErrorValue<T, E> &x) {
-        return ErrorValue(acos(x.value), x.error/sqrt(1 - x.value*x.value));
+        return ErrorValue(std::acos(x.value), x.error/std::sqrt(1 - x.value*x.value));
     }
 
     template <typename T, typename E>
     auto atan(const ErrorValue<T, E> &x) {
-        return ErrorValue(atan(x.value), x.error/(1 + x.value*x.value));
+        return ErrorValue(std::atan(x.value), x.error/(1 + x.value*x.value));
     }
 
     template <typename T, typename E, typename T1, typename E1>
@@ -392,83 +392,83 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
 
     template <typename T, typename E>
     auto sinh(const ErrorValue<T, E> &x) {
-        return ErrorValue(sinh(x.value), cosh(x.value)*x.error);
+        return ErrorValue(std::sinh(x.value), std::cosh(x.value)*x.error);
     }
 
     template <typename T, typename E>
     auto cosh(const ErrorValue<T, E> &x) {
-        return ErrorValue(cosh(x.value), abs(sinh(x.value))*x.error);
+        return ErrorValue(std::cosh(x.value), std::abs(std::sinh(x.value))*x.error);
     }
 
     template <typename T, typename E>
     auto tanh(const ErrorValue<T, E> &x) {
-        return ErrorValue(tanh(x.value), x.error/pow(cosh(x.value), 2));
+        return ErrorValue(std::tanh(x.value), x.error/std::pow(std::cosh(x.value), 2));
     }
 
     template <typename T, typename E>
     auto asinh(const ErrorValue<T, E> &x) {
-        return ErrorValue(asinh(x.value), x.error/sqrt(1 + x.value*x.value));
+        return ErrorValue(std::asinh(x.value), x.error/std::sqrt(1 + x.value*x.value));
     }
 
     template <typename T, typename E>
     auto acosh(const ErrorValue<T, E> &x) {
-        return ErrorValue(acosh(x.value), x.error/sqrt(x.value*x.value - 1));
+        return ErrorValue(std::acosh(x.value), x.error/std::sqrt(x.value*x.value - 1));
     }
 
     template <typename T, typename E>
     auto atanh(const ErrorValue<T, E> &x) {
-        return ErrorValue(atanh(x.value), x.error/(1 - x.value*x.value));
+        return ErrorValue(std::atanh(x.value), x.error/(1 - x.value*x.value));
     }
 
     template <typename T, typename E>
     auto erf(const ErrorValue<T, E> &x) {
         return ErrorValue(
-                erf(x.value),
-                2*exp(-x.value*x.value)*x.error/sqrt(M_PI)
+                std::erf(x.value),
+                2*std::exp(-x.value*x.value)*x.error/std::sqrt(M_PI)
         );
     }
 
     template <typename T, typename E>
     auto erfc(const ErrorValue<T, E> &x) {
         return ErrorValue(
-                erfc(x.value),
-                2*exp(-x.value*x.value)*x.error/sqrt(M_PI)
+                std::erfc(x.value),
+                2*std::exp(-x.value*x.value)*x.error/std::sqrt(M_PI)
         );
     }
 
     template <typename T, typename E>
     auto exp(const ErrorValue<T, E> &x) {
-        return ErrorValue(exp(x.value), exp(x.value)*x.error);
+        return ErrorValue(std::exp(x.value), std::exp(x.value)*x.error);
     }
 
     template <typename T, typename E>
     auto log10(const ErrorValue<T, E> &x) {
-        return ErrorValue(log10(x.value), x.error/(x.value * log(static_cast<E>(10))));
+        return ErrorValue(std::log10(x.value), x.error/(x.value * std::log(static_cast<E>(10))));
     }
 
     template <typename T, typename E>
     auto exp2(const ErrorValue<T, E> &x) {
-        return ErrorValue(exp2(x.value), exp2(x.value)*log(static_cast<E>(2))*x.error);
+        return ErrorValue(std::exp2(x.value), std::exp2(x.value)*std::log(static_cast<E>(2))*x.error);
     }
 
     template <typename T, typename E>
     auto log2(const ErrorValue<T, E> &x) {
-        return ErrorValue(log2(x.value), x.error/(x.value*log(static_cast<E>(2))));
+        return ErrorValue(std::log2(x.value), x.error/(x.value*std::log(static_cast<E>(2))));
     }
 
     template <typename T, typename E>
     auto log(const ErrorValue<T, E> &x) {
-        return ErrorValue(log(x.value), x.error/x.value);
+        return ErrorValue(std::log(x.value), x.error/x.value);
     }
 
     template <typename T, typename E>
     auto expm1(const ErrorValue<T, E> &x) {
-        return ErrorValue(expm1(x.value), exp(x.value)*x.error);
+        return ErrorValue(std::expm1(x.value), std::exp(x.value)*x.error);
     }
 
     template <typename T, typename E>
     auto log1p(const ErrorValue<T, E> &x) {
-        return ErrorValue(log1p(x.value), x.error/(1 + x.value));
+        return ErrorValue(std::log1p(x.value), x.error/(1 + x.value));
     }
 
 #ifdef __cpp_lib_concepts
@@ -482,8 +482,8 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
                       "Type of logn base value must be integral");
 #endif
         return ErrorValue<T, E>(
-                log(x.value)/log(n),
-                x.error/(x.value*log(n))
+                std::log(x.value)/std::log(n),
+                x.error/(x.value*std::log(n))
                 );
     }
 #ifdef __cpp_lib_concepts
@@ -497,8 +497,8 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
                       "Type of logn base value must be integral");
 #endif
         return ErrorValue<double , E>(
-                log(x.value)/log(n),
-                x.error/(x.value*log(n))
+                std::log(x.value)/std::log(n),
+                x.error/(x.value*std::log(n))
         );
     }
 
@@ -507,8 +507,8 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
         T x = base.value, y = exponent.value;
         T dx = base.error, dy = exponent.error;
         return ErrorValue(
-                pow(x, y),
-                sqrt(pow(y*pow(x, y - 1)*dx, 2) + pow(pow(x, y)*log(x)*dy, 2))
+                std::pow(x, y),
+                std::sqrt(std::pow(y*std::pow(x, y - 1)*dx, 2) + std::pow(std::pow(x, y)*std::log(x)*dy, 2))
                 );
     }
 
@@ -522,19 +522,19 @@ template <typename T, typename E, Arithmetic N>
                       "Type of exponent base value must be arithmetic, but not bool");
 #endif
         return ErrorValue(
-                pow(base.value, exponent),
-                abs(exponent*pow(base.value, exponent - 1))*base.error
+                std::pow(base.value, exponent),
+                std::abs(exponent*pow(base.value, exponent - 1))*base.error
         );
     }
 
     template <typename T, typename E>
     auto sqrt(const ErrorValue<T, E> &x) {
-        return ErrorValue(sqrt(x.value), x.error/(2*sqrt(x.value)));
+        return ErrorValue(std::sqrt(x.value), x.error/(2*std::sqrt(x.value)));
     }
 
     template <typename T, typename E>
     auto cbrt(const ErrorValue<T, E> &x) {
-        return ErrorValue(cbrt(x.value), x.error/(3*pow(x.value, 2.0/3)));
+        return ErrorValue(std::cbrt(x.value), x.error/(3*std::pow(x.value, 2.0/3)));
     }
 
     template <typename T, typename E, typename T1, typename E1>
@@ -542,14 +542,14 @@ template <typename T, typename E, Arithmetic N>
         T x = x_.value, y = y_.value;
         T dx = x_.error, dy = y_.error;
         return ErrorValue(
-                hypot(x, y),
-                sqrt(pow(x*dx, 2) + pow(y*dy, 2))/sqrt(x*x + y*y)
+                std::hypot(x, y),
+                std::sqrt(pow(x*dx, 2) + std::pow(y*dy, 2))/std::sqrt(x*x + y*y)
                 );
     }
 
     template <typename T, typename E>
     auto abs(const ErrorValue<T, E> &x) {
-        return ErrorValue(abs(x.value), x.error);
+        return ErrorValue(std::abs(x.value), x.error);
     }
 
     template <typename T, typename E, typename T1, typename E1, typename T2, typename E2>
@@ -558,7 +558,7 @@ template <typename T, typename E, Arithmetic N>
         E dx = x_.error, dy = y_.error, dz = z_.error;
         E ex = dx/x;
         E ey = dy/y;
-        return ErrorValue(fma(x, y, z), sqrt(x*x*y*y*(ex*ex + ey*ey) + dz*dz));
+        return ErrorValue(std::fma(x, y, z), std::sqrt(x*x*y*y*(ex*ex + ey*ey) + dz*dz));
     }
 
 #endif //LIBERRC_ADD_ERRMATH

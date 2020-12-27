@@ -351,7 +351,7 @@ public:
     template <typename AT, typename AE>
     typename std::enable_if<std::is_arithmetic_v<AT> && std::is_floating_point_v<AE>, void>::type
 #endif
-    set(T value_, E error_) {
+    set(AT value_, AE error_) {
         value = value_;
         error = error_;
     }

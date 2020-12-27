@@ -37,6 +37,11 @@ concept Arithmetic = std::is_arithmetic_v<T> && !std::is_same_v<T, bool>;
 template <Arithmetic T = long double , std::floating_point E = long double>
 class ErrorValue {
 
+#elif defined(__cpp_concepts)
+
+template<typename T>
+concept Arithmetic = std::is_arithmetic_v<T> && !std::is_same_v<T, bool>;
+
 #else
 template <typename T = double , typename E = double>
 class ErrorValue {

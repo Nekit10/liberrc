@@ -191,8 +191,6 @@ public:
         return *this;
     }
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "readability-const-return-type"
     const ErrorValue operator++(int) {
         ErrorValue tmp(*this);
         ++(*this);
@@ -209,7 +207,6 @@ public:
         --(*this);
         return tmp;
     }
-#pragma clang diagnostic pop
 
     //------- COMPARISON OPERATORS -------
 

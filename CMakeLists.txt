@@ -7,4 +7,3 @@ add_subdirectory(unittests)
 
 add_library(liberrc INTERFACE)
 target_include_directories(liberrc INTERFACE liberrc)
-SET_TARGET_PROPERTIES(name PROPERTIES PREFIX "")

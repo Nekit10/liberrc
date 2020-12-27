@@ -24,8 +24,11 @@
 #include <ostream>
 #include <cmath>
 
-#ifdef LIBERRC_CPP2A_SUPPORT
+#if __has_include(<compare>)
 #include <compare>
+#endif
+
+#if defined(__cpp_concepts) && __has_include(<concept>)
 #include <concepts>
 
 template<typename T>
@@ -207,7 +210,7 @@ public:
 
     //------- COMPARISON OPERATORS -------
 
-#ifdef LIBERRC_CPP2A_SUPPORT
+#if defined(__cpp_impl_three_way_comparison) && defined(__cpp_lib_three_way_comparison)
     std::weak_ordering operator<=>(const ErrorValue  &ev) const {
         return (value <=> ev.value);
     }
@@ -466,7 +469,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
         return ErrorValue(log1p(x.value), x.error/(1 + x.value));
     }
 
-#ifdef LIBERRC_CPP2A_SUPPORT
+#ifdef __cpp_lib_concepts
     template <std::floating_point T, std::floating_point E, Arithmetic N>
     ErrorValue<T, E> logn(ErrorValue<T , E> x, N n) {
 #else
@@ -481,7 +484,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
                 x.error/(x.value*log(n))
                 );
     }
-#ifdef LIBERRC_CPP2A_SUPPORT
+#ifdef __cpp_lib_concepts
     template <std::integral T, std::floating_point E, Arithmetic N>
     ErrorValue<double, E> logn(ErrorValue<T , E> x, N n) {
 #else
@@ -507,7 +510,7 @@ std::ostream& operator<<(std::ostream& os, const ErrorValue<T,E> &ev) {
                 );
     }
 
-#ifdef LIBERRC_CPP2A_SUPPORT
+#ifdef __cpp_lib_concepts
 template <typename T, typename E, Arithmetic N>
     auto pow(const ErrorValue<T , E>& base, N exponent) {
 #else

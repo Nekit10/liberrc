@@ -28,7 +28,7 @@
 #include <compare>
 #endif
 
-#if defined(__cpp_concepts) && __has_include(<concept>)
+#if defined(__cpp_concepts) && __has_include(<concepts>)
 #include <concepts>
 
 template<typename T>

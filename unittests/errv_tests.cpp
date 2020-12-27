@@ -245,11 +245,23 @@ TEST(ErrorValueComparisonOperators, DefaultComparisonOperator) {
     ASSERT_FALSE(d > c);
 }
 
+TEST(ErrorValueMemberOperators, ConstMemberOperator) {
+    const ErrorValue a(10.2, 12.4);
+    ASSERT_NEAR(a[0], 10.2, ABSMAX );
+    ASSERT_NEAR(a[1], 12.4, ABSMAX);
+    ASSERT_THROW(a[2], std::range_error);
+}
+
 TEST(ErrorValueMemberOperators, MemberOperator) {
     ErrorValue a(10.2, 12.4);
     ASSERT_NEAR(a[0], 10.2, ABSMAX );
     ASSERT_NEAR(a[1], 12.4, ABSMAX);
     ASSERT_THROW(a[2], std::range_error);
+
+    a[0] = 15.6;
+    a[1] = 0.3;
+    ASSERT_NEAR(a[0], 15.6, ABSMAX );
+    ASSERT_NEAR(a[1], 0.3, ABSMAX);
 }
 
 TEST(ErrorValueStaticCastConversionOperators, TStaticCastConversionOperator) {

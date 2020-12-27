@@ -16,8 +16,8 @@
  *  see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBERRC_ERRC_H
-#define LIBERRC_ERRC_H
+#ifndef LIBERRC_LIBERRC_H
+#define LIBERRC_LIBERRC_H
 
 #include <type_traits>
 #include <iomanip>
@@ -558,4 +558,4 @@ template <typename T, typename E, Arithmetic N>
 
 #endif //LIBERRC_ADD_ERRMATH
 
-#endif //LIBERRC_ERRC_H
+#endif //LIBERRC_LIBERRC_H

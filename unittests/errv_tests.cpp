@@ -18,7 +18,7 @@
 
 #include "gtest/gtest.h"
 
-#include "errc.h"
+#include "liberrc.h"
 
 const double ABSMAX = 0.000001;
 

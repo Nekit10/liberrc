@@ -307,7 +307,7 @@ public:
 
     //------- MEMBER OPERATORS -------
 
-    E operator[](int i) const {
+    long double operator[](int i) const {
         switch(i) {
             case 0:
                 return value;

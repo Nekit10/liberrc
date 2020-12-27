@@ -307,6 +307,19 @@ public:
 
     //------- MEMBER OPERATORS -------
 
+#ifdef __cpp_concepts
+    T& operator[](int i) requires std::is_same_v<T, E> {
+        switch(i) {
+            case 0:
+                return value;
+            case 1:
+                return error;
+            default:
+                throw std::range_error("ErrorValue index must be 0 or 1");
+        }
+    }
+#endif
+
     long double operator[](int i) const {
         switch(i) {
             case 0:

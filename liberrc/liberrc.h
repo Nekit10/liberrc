@@ -35,7 +35,7 @@ template <Arithmetic T = long double , std::floating_point E = long double>
 class ErrorValue {
 
 #else
-template <typename T = long double , typename E = long double>
+template <typename T = double , typename E = double>
 class ErrorValue {
 
     static_assert(std::is_arithmetic<T>::value && !std::is_same<T, bool>::value,

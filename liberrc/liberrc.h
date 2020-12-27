@@ -173,10 +173,10 @@ public:
 
 #ifdef __cpp_concepts
     template <Arithmetic A>
-    ErrorValue&
+    ErrorValue
 #else
     template <typename A>
-    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue>::type
 #endif
     operator+(A value_) const {
         ErrorValue res = *this;
@@ -192,10 +192,10 @@ public:
 
 #ifdef __cpp_concepts
     template <Arithmetic A>
-    ErrorValue&
+    ErrorValue
 #else
     template <typename A>
-    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue>::type
 #endif
     operator-(A value_) const {
         ErrorValue res = *this;
@@ -211,10 +211,10 @@ public:
 
 #ifdef __cpp_concepts
     template <Arithmetic A>
-    ErrorValue&
+    ErrorValue
 #else
     template <typename A>
-    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue>::type
 #endif
     operator*(A value_) const {
         ErrorValue res = *this;
@@ -230,10 +230,10 @@ public:
 
 #ifdef __cpp_concepts
     template <Arithmetic A>
-    ErrorValue&
+    ErrorValue
 #else
     template <typename A>
-    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue>::type
 #endif
     operator/(A value_) const {
         ErrorValue res = *this;

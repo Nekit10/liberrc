@@ -72,7 +72,14 @@ public:
         return *this;
     }
 
-    ErrorValue& operator=(T value_) {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator=(A value_) {
         value = value_;
         error = defaultNumberError(value_);
           return *this;
@@ -86,7 +93,14 @@ public:
         return *this;
     }
 
-    ErrorValue operator+=(T value_) {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator+=(A value_) {
         *this += ErrorValue(value_, defaultNumberError(value_));
         return *this;
     }
@@ -97,7 +111,14 @@ public:
         return *this;
     }
 
-    ErrorValue operator-=(T value_) {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator-=(A value_) {
         *this -= ErrorValue(value_, defaultNumberError(value_));
         return *this;
     }
@@ -110,7 +131,14 @@ public:
         return *this;
     }
 
-    ErrorValue operator*=(T value_) {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator*=(A value_) {
         *this *= ErrorValue(value_, defaultNumberError(value_));
         return *this;
     }
@@ -123,7 +151,14 @@ public:
         return *this;
     }
 
-    ErrorValue operator/=(T value_) {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator/=(A value_) {
         *this /= ErrorValue(value_, defaultNumberError(value_));
         return *this;
     }
@@ -136,7 +171,14 @@ public:
         return res;
     }
 
-    ErrorValue operator+(const T &value_) const {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator+(A value_) const {
         ErrorValue res = *this;
         res += value_;
         return res;
@@ -148,7 +190,14 @@ public:
         return res;
     }
 
-    ErrorValue operator-(const T &value_) const {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator-(A value_) const {
         ErrorValue res = *this;
         res -= value_;
         return res;
@@ -160,7 +209,14 @@ public:
         return res;
     }
 
-    ErrorValue operator*(const T &value_) const {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator*(A value_) const {
         ErrorValue res = *this;
         res *= value_;
         return res;
@@ -172,7 +228,14 @@ public:
         return res;
     }
 
-    ErrorValue operator/(const T &value_) const {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+    ErrorValue&
+#else
+    template <typename A>
+    typename std::enable_if<std::is_arithmetic_v<A>, ErrorValue&>::type
+#endif
+    operator/(A value_) const {
         ErrorValue res = *this;
         res /= value_;
         return res;
@@ -257,13 +320,25 @@ public:
 
     //------- STATIC_CAST CONVERSION OPERATORS -------
 
-    explicit operator T() const {
+#ifdef __cpp_concepts
+    template <Arithmetic A>
+#else
+    template<typename A, typename = typename std::enable_if<std::is_arithmetic_v<A>>::type>
+#endif
+    explicit operator A() const {
         return value;
     };
 
     //------- VOID METHODS -------
 
-    void set(T value_, E error_) {
+#ifdef __cpp_lib_concepts
+    template <Arithmetic AT, std::floating_point AE>
+    void
+#else
+    template <typename AT, typename AE>
+    typename std::enable_if<std::is_arithmetic_v<AT> && std::is_floating_point_v<AE>, void>::type
+#endif
+    set(T value_, E error_) {
         value = value_;
         error = error_;
     }
